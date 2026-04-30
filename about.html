@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<!--
+  =============================================================
+  신해원 포트폴리오 — About (about.html)
+  광운대학교 인터넷활용 / 2026
+  -------------------------------------------------------------
+  이 페이지의 시맨틱 구조
+    <header> 사이트 공통
+    <main>
+      <section.page-header>     페이지 타이틀
+      <section.about-intro>     긴 자기소개
+      <section.education>       학력 타임라인
+      <section.interests>       관심 분야 그리드
+    <footer> 사이트 공통
+  =============================================================
+-->
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About · 신해원 포트폴리오</title>
+  <meta name="description" content="신해원에 대한 소개 — 학력, 관심 분야." />
+
+  <link rel="stylesheet" as="style" crossorigin
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand" aria-label="홈으로">
+        <span class="brand-mark">SHW</span>
+        <span class="brand-suffix">/portfolio</span>
+      </a>
+      <nav class="primary-nav" aria-label="주 메뉴">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ====================================================
+         페이지 헤더
+         ==================================================== -->
+    <section class="page-header">
+      <div class="container">
+        <span class="section-eyebrow">// About</span>
+        <h1 class="section-title">저는 이런 사람입니다.</h1>
+        <p class="section-desc">
+          요리와 고양이를 좋아하는 경영학부 학생.
+          현장 감각과 시스템 사고를 함께 갖추고 싶어 ERP·웹·데이터를 학습하고 있습니다.
+        </p>
+      </div>
+    </section>
+
+
+    <!-- ====================================================
+         자기소개 (긴 본문)
+         ==================================================== -->
+    <section class="section">
+      <div class="container container-narrow">
+        <article class="fade-in">
+          <p style="font-size: 1.08rem; color: var(--text-soft); line-height: 1.85; margin-bottom: 18px;">
+            안녕하세요, 광운대학교 경영학부에 재학 중인 <strong style="color: var(--text);">신해원</strong>입니다.
+            저는 비즈니스가 어떻게 굴러가는지 이해하고, 그 흐름을 시스템으로 옮기는 일에 흥미를 느낍니다.
+          </p>
+          <p style="font-size: 1.08rem; color: var(--text-soft); line-height: 1.85; margin-bottom: 18px;">
+            특히 <strong style="color: var(--text);">SAP ERP</strong>를 깊게 공부하고 있습니다.
+            MM·ABAP 자격을 취득하며 ECC 환경에서 직접 트랜잭션을 다루어 보았고,
+            현재는 ABAP 리포트 작성과 모듈 간 데이터 흐름을 이해하는 데 시간을 쓰고 있습니다.
+          </p>
+          <p style="font-size: 1.08rem; color: var(--text-soft); line-height: 1.85;">
+            한편으로는 요리, 주식 투자, AI를 활용한 바이브 코딩 같은 다양한 영역에 호기심이 많습니다.
+            결국 모두 <strong style="color: var(--text);">"잘 짜인 시스템 위에서 좋은 결과가 나온다"</strong>는
+            한 가지 믿음으로 이어진다고 생각합니다.
+          </p>
+        </article>
+      </div>
+    </section>
+
+
+    <!-- ====================================================
+         학력 타임라인
+         ==================================================== -->
+    <section class="section section--alt" aria-labelledby="edu-title">
+      <div class="container">
+        <header class="section-heading fade-in">
+          <span class="section-eyebrow">// Education</span>
+          <h2 class="section-title" id="edu-title">학력</h2>
+          <p class="section-desc">
+            지금까지 거쳐 온 학교들입니다.
+          </p>
+        </header>
+
+        <ol class="timeline" aria-label="학력 타임라인">
+
+          <li class="timeline-item fade-in">
+            <div class="timeline-mark" aria-hidden="true">광</div>
+            <div class="timeline-body">
+              <h3>광운대학교</h3>
+              <p>경영학부 · 재학 중</p>
+            </div>
+            <span class="timeline-period">2021 — 현재</span>
+          </li>
+
+          <li class="timeline-item fade-in">
+            <div class="timeline-mark" aria-hidden="true">여</div>
+            <div class="timeline-body">
+              <h3>여의도고등학교</h3>
+              <p>일반계 고등학교 · 졸업</p>
+            </div>
+            <span class="timeline-period">2018 — 2020</span>
+          </li>
+
+          <li class="timeline-item fade-in">
+            <div class="timeline-mark" aria-hidden="true">영</div>
+            <div class="timeline-body">
+              <h3>영서중학교</h3>
+              <p>중학교 · 졸업</p>
+            </div>
+            <span class="timeline-period">2015 — 2017</span>
+          </li>
+
+          <li class="timeline-item fade-in">
+            <div class="timeline-mark" aria-hidden="true">영</div>
+            <div class="timeline-body">
+              <h3>영서초등학교</h3>
+              <p>초등학교 · 졸업</p>
+            </div>
+            <span class="timeline-period">2009 — 2014</span>
+          </li>
+
+        </ol>
+      </div>
+    </section>
+
+
+    <!-- ====================================================
+         관심 분야
+         ==================================================== -->
+    <section class="section" aria-labelledby="interest-title">
+      <div class="container">
+        <header class="section-heading fade-in">
+          <span class="section-eyebrow">// Interests</span>
+          <h2 class="section-title" id="interest-title">관심 분야</h2>
+          <p class="section-desc">
+            업무와 취미가 따로 떨어져 있지 않다고 생각합니다.
+            아래는 지금 시간을 들이고 있는 영역들이에요.
+          </p>
+        </header>
+
+        <ul class="interest-grid">
+          <li class="interest-tag fade-in">
+            <span class="interest-emoji" aria-hidden="true">🍳</span>
+            <span class="interest-label">요리</span>
+          </li>
+          <li class="interest-tag fade-in">
+            <span class="interest-emoji" aria-hidden="true">📈</span>
+            <span class="interest-label">주식 투자</span>
+          </li>
+          <li class="interest-tag fade-in">
+            <span class="interest-emoji" aria-hidden="true">🗄️</span>
+            <span class="interest-label">ERP</span>
+          </li>
+          <li class="interest-tag fade-in">
+            <span class="interest-emoji" aria-hidden="true">⚡</span>
+            <span class="interest-label">바이브 코딩</span>
+          </li>
+          <li class="interest-tag fade-in">
+            <span class="interest-emoji" aria-hidden="true">🐱</span>
+            <span class="interest-label">고양이</span>
+          </li>
+          <li class="interest-tag fade-in">
+            <span class="interest-emoji" aria-hidden="true">📚</span>
+            <span class="interest-label">독서</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <p class="footer-brand-name">신해원 · Shin Haewon</p>
+        <p class="footer-brand-desc">
+          광운대학교 경영학부 / 예비 ERP 개발자.
+          비즈니스의 흐름을 코드로 옮기는 일에 관심이 있습니다.
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>Pages</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="mailto:win737449@gmail.com">win737449@gmail.com</a></li>
+          <li><a href="https://github.com/bapzzi" target="_blank" rel="noopener">github.com/bapzzi</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <small>© <span id="year"></span> Shin Haewon. All rights reserved.</small>
+      <small>Built with HTML · CSS · JavaScript</small>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<!--
+  =============================================================
+  신해원 포트폴리오 — Portfolio (portfolio.html)
+  광운대학교 인터넷활용 / 2026
+  -------------------------------------------------------------
+  이 페이지의 시맨틱 구조
+    <header>  사이트 공통
+    <main>
+      <section.page-header>   페이지 타이틀
+      <section.projects>      프로젝트 카드 그리드
+    <footer>  사이트 공통
+  =============================================================
+-->
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio · 신해원 포트폴리오</title>
+  <meta name="description" content="신해원이 학습하며 만든 프로젝트 모음." />
+
+  <link rel="stylesheet" as="style" crossorigin
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand" aria-label="홈으로">
+        <span class="brand-mark">SHW</span>
+        <span class="brand-suffix">/portfolio</span>
+      </a>
+      <nav class="primary-nav" aria-label="주 메뉴">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ====================================================
+         페이지 헤더
+         ==================================================== -->
+    <section class="page-header">
+      <div class="container">
+        <span class="section-eyebrow">// Portfolio</span>
+        <h1 class="section-title">학습한 것을 만들어 봅니다.</h1>
+        <p class="section-desc">
+          실제로 만들고, 실패하고, 다시 만든 결과물들입니다.
+          학습 중에 작성한 프로젝트도 포함되어 있어요.
+        </p>
+      </div>
+    </section>
+
+
+    <!-- ====================================================
+         프로젝트 카드 그리드
+         ==================================================== -->
+    <section class="section" aria-labelledby="projects-title">
+      <div class="container">
+
+        <h2 class="visually-hidden" id="projects-title" style="position:absolute;left:-9999px;">
+          프로젝트 목록
+        </h2>
+
+        <div class="project-grid">
+
+          <!-- 프로젝트 1 — 본 포트폴리오 사이트 (메타!) -->
+          <article class="project-card fade-in">
+            <div class="project-cover" aria-hidden="true">
+              &lt;/&gt;&nbsp;portfolio
+            </div>
+            <div class="project-body">
+              <p class="project-meta">2026 · Web</p>
+              <h3 class="project-title">Personal Portfolio Website</h3>
+              <p class="project-desc">
+                지금 보고 계신 이 사이트입니다. 인터넷활용 수업 과제로 시작해
+                실제로 채용 현장에서도 사용할 수 있는 수준으로 다듬었습니다.
+                Pretendard 폰트, CSS 변수, IntersectionObserver, mailto 폼을 활용했습니다.
+              </p>
+              <ul class="project-stack" aria-label="사용 기술">
+                <li class="stack-tag">
+                  <img src="https://cdn.simpleicons.org/html5/E34F26" alt="" /> HTML5
+                </li>
+                <li class="stack-tag">
+                  <img src="https://cdn.simpleicons.org/css3/1572B6" alt="" /> CSS3
+                </li>
+                <li class="stack-tag">
+                  <img src="https://cdn.simpleicons.org/javascript/F7DF1E" alt="" /> JavaScript
+                </li>
+              </ul>
+              <a href="https://github.com/bapzzi" target="_blank" rel="noopener" class="project-link">
+                Repository 보기 <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- 프로젝트 2 — SAP MM -->
+          <article class="project-card fade-in">
+            <div class="project-cover" aria-hidden="true">
+              SAP&nbsp;MM
+            </div>
+            <div class="project-body">
+              <p class="project-meta">2025 · ERP / Logistics</p>
+              <h3 class="project-title">SAP MM 자격 학습 프로젝트</h3>
+              <p class="project-desc">
+                SAP Materials Management 모듈을 학습하며 구매·재고·송장 검증의
+                전체 프로세스를 다뤘습니다. 트랜잭션 ME21N, MIGO, MIRO 등을
+                ECC 환경에서 직접 실행해 보았습니다.
+              </p>
+              <ul class="project-stack" aria-label="사용 기술">
+                <li class="stack-tag">
+                  <img src="https://cdn.simpleicons.org/sap/0FAAFF" alt="" /> SAP ECC
+                </li>
+                <li class="stack-tag">📦 MM Module</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- 프로젝트 3 — SAP ABAP -->
+          <article class="project-card fade-in">
+            <div class="project-cover" aria-hidden="true">
+              SAP&nbsp;ABAP
+            </div>
+            <div class="project-body">
+              <p class="project-meta">2025 · ERP / Development</p>
+              <h3 class="project-title">SAP ABAP 자격 학습 프로젝트</h3>
+              <p class="project-desc">
+                ABAP 언어로 SE38 리포트와 ALV 그리드를 작성했습니다.
+                Internal Table, SELECT 문, MODIFY 등 핵심 문법을 익혔고,
+                실제 비즈니스 시나리오에 적용해 보는 단계로 확장하고 있습니다.
+              </p>
+              <ul class="project-stack" aria-label="사용 기술">
+                <li class="stack-tag">
+                  <img src="https://cdn.simpleicons.org/sap/0FAAFF" alt="" /> SAP ECC
+                </li>
+                <li class="stack-tag">⚙️ ABAP</li>
+                <li class="stack-tag">📊 ALV Report</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- 프로젝트 4 — 데이터 자동화 -->
+          <article class="project-card fade-in">
+            <div class="project-cover" aria-hidden="true">
+              data&nbsp;ops
+            </div>
+            <div class="project-body">
+              <p class="project-meta">2025 · Data / Automation</p>
+              <h3 class="project-title">개인 데이터 자동화 도구</h3>
+              <p class="project-desc">
+                Excel 과 Python 을 활용해 반복적인 데이터 정리 작업을
+                자동화했습니다. 주식 종목 데이터 수집, 가계부 정리 등
+                실생활에서 쓰이는 작은 스크립트 모음입니다.
+              </p>
+              <ul class="project-stack" aria-label="사용 기술">
+                <li class="stack-tag">
+                  <img src="https://cdn.simpleicons.org/python/3776AB" alt="" /> Python
+                </li>
+                <li class="stack-tag">
+                  <img src="https://cdn.simpleicons.org/microsoftexcel/217346" alt="" /> Excel
+                </li>
+              </ul>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- 더 많은 프로젝트 안내 -->
+        <p style="text-align: center; margin-top: 64px; color: var(--text-muted); font-family: var(--font-mono); font-size: 0.9rem;">
+          // more projects coming soon —
+          <a href="https://github.com/bapzzi" target="_blank" rel="noopener"
+             style="color: var(--accent); font-weight: 600;">github.com/bapzzi ↗</a>
+        </p>
+
+      </div>
+    </section>
+
+  </main>
+
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <p class="footer-brand-name">신해원 · Shin Haewon</p>
+        <p class="footer-brand-desc">
+          광운대학교 경영학부 / 예비 ERP 개발자.
+          비즈니스의 흐름을 코드로 옮기는 일에 관심이 있습니다.
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>Pages</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="mailto:win737449@gmail.com">win737449@gmail.com</a></li>
+          <li><a href="https://github.com/bapzzi" target="_blank" rel="noopener">github.com/bapzzi</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <small>© <span id="year"></span> Shin Haewon. All rights reserved.</small>
+      <small>Built with HTML · CSS · JavaScript</small>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

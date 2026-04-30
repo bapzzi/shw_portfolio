@@ -1,0 +1,1084 @@
+/* =============================================================
+ * 신해원 포트폴리오 — 공통 스타일시트
+ * 광운대학교 인터넷활용 / 2026
+ * -------------------------------------------------------------
+ *  목차
+ *   1. 디자인 토큰 (CSS 변수)
+ *   2. 리셋 & 기본 타이포그래피
+ *   3. 공통 레이아웃 (.container, .section)
+ *   4. 사이트 헤더 & 네비게이션
+ *   5. 버튼
+ *   6. 히어로 (Home)
+ *   7. 섹션 헤딩 (모든 페이지 공통 패턴)
+ *   8. 스킬 리스트
+ *   9. 학력 타임라인 (About)
+ *  10. 관심사 태그 (About)
+ *  11. 프로젝트 카드 (Portfolio)
+ *  12. 컨택트 카드 & 폼 (Contact)
+ *  13. 사이트 푸터
+ *  14. 애니메이션 (페이드인 / 타이핑 커서)
+ *  15. 반응형 (Tablet / Mobile)
+ *  16. 접근성 (prefers-reduced-motion)
+ * ============================================================= */
+
+
+/* ===== 1. 디자인 토큰 ============================================ */
+:root {
+    /* 색상 — 모노크롬 + 인디고 액센트 */
+    --bg:           #fafaf9;
+    --surface:      #ffffff;
+    --text:         #18181b;
+    --text-soft:    #52525b;
+    --text-muted:   #a1a1aa;
+    --accent:       #4f46e5;
+    --accent-hover: #4338ca;
+    --accent-soft:  rgba(79, 70, 229, 0.08);
+    --border:       #e4e4e7;
+    --border-soft:  #f4f4f5;
+
+    /* 타이포그래피 */
+    --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui,
+                 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+    /* 컨테이너 너비 */
+    --container:        1080px;
+    --container-narrow: 760px;
+
+    /* 라운드 */
+    --radius-sm: 6px;
+    --radius:    12px;
+    --radius-lg: 20px;
+
+    /* 그림자 */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+    --shadow:    0 1px 3px rgba(0, 0, 0, 0.05),
+                 0 8px 24px rgba(0, 0, 0, 0.04);
+    --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.06),
+                 0 20px 48px rgba(0, 0, 0, 0.08);
+
+    /* 트랜지션 */
+    --t-base: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --t-slow: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+/* ===== 2. 리셋 & 기본 ========================================== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    transition: color var(--t-base);
+}
+
+ul, ol {
+    list-style: none;
+}
+
+button,
+input,
+textarea {
+    font: inherit;
+    color: inherit;
+}
+
+/* 셀렉션 색상 */
+::selection {
+    background: var(--accent);
+    color: #fff;
+}
+
+
+/* ===== 3. 공통 레이아웃 ========================================== */
+.container {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 0 32px;
+}
+
+.container-narrow {
+    max-width: var(--container-narrow);
+    margin: 0 auto;
+    padding: 0 32px;
+}
+
+.section {
+    padding: 96px 0;
+}
+
+.section + .section {
+    padding-top: 0; /* 연속 섹션은 위쪽 패딩 제거 */
+}
+
+.section--alt {
+    background: var(--surface);
+    border-top: 1px solid var(--border-soft);
+    border-bottom: 1px solid var(--border-soft);
+}
+
+
+/* ===== 4. 사이트 헤더 ========================================== */
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(250, 250, 249, 0.85);
+    backdrop-filter: saturate(180%) blur(12px);
+    -webkit-backdrop-filter: saturate(180%) blur(12px);
+    border-bottom: 1px solid var(--border-soft);
+}
+
+.header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 68px;
+}
+
+.brand {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 4px;
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: -0.02em;
+}
+
+.brand-mark {
+    color: var(--accent);
+    font-family: var(--font-mono);
+}
+
+.brand-suffix {
+    color: var(--text-muted);
+    font-weight: 400;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+}
+
+.primary-nav {
+    display: flex;
+    gap: 4px;
+}
+
+.primary-nav a {
+    position: relative;
+    padding: 8px 14px;
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: var(--text-soft);
+    border-radius: var(--radius-sm);
+    transition: color var(--t-base), background var(--t-base);
+}
+
+.primary-nav a:hover {
+    color: var(--text);
+    background: var(--border-soft);
+}
+
+/* 현재 페이지 강조 — JS가 .is-active 클래스를 붙임 */
+.primary-nav a.is-active {
+    color: var(--accent);
+    background: var(--accent-soft);
+}
+
+
+/* ===== 5. 버튼 ============================================== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 22px;
+    font-size: 0.92rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    border-radius: var(--radius-sm);
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: transform var(--t-base),
+                background var(--t-base),
+                border-color var(--t-base),
+                color var(--t-base);
+    text-decoration: none;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-primary {
+    background: var(--accent);
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: var(--accent-hover);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--text);
+    border-color: var(--border);
+}
+
+.btn-outline:hover {
+    border-color: var(--text);
+    background: var(--surface);
+}
+
+.btn-arrow {
+    transition: transform var(--t-base);
+    display: inline-block;
+}
+
+.btn:hover .btn-arrow {
+    transform: translateX(3px);
+}
+
+
+/* ===== 6. 히어로 (Home) ========================================== */
+.hero {
+    padding: 96px 0 80px;
+    position: relative;
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 48px;
+    align-items: center;
+}
+
+@media (min-width: 880px) {
+    .hero-grid {
+        grid-template-columns: 1.4fr 1fr;
+        gap: 80px;
+    }
+}
+
+.hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    font-family: var(--font-mono);
+    color: var(--accent);
+    margin-bottom: 18px;
+}
+
+.hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-soft);
+    animation: pulse 2.4s infinite;
+}
+
+.hero-title {
+    font-size: clamp(2.4rem, 5.5vw, 3.6rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: 16px;
+}
+
+.hero-title-en {
+    display: block;
+    font-size: 0.4em;
+    font-weight: 500;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    letter-spacing: 0;
+    margin-top: 12px;
+}
+
+.hero-role {
+    font-size: 1.25rem;
+    color: var(--text-soft);
+    margin-bottom: 28px;
+    min-height: 1.6em;  /* 타이핑 효과 시 줄높이 흔들림 방지 */
+}
+
+.hero-role-typed {
+    color: var(--text);
+    font-weight: 600;
+}
+
+.hero-role-typed::after {
+    content: '';
+    display: inline-block;
+    width: 2px;
+    height: 1.1em;
+    background: var(--accent);
+    margin-left: 4px;
+    vertical-align: -0.15em;
+    animation: blink 1s steps(2) infinite;
+}
+
+.hero-intro {
+    font-size: 1.05rem;
+    color: var(--text-soft);
+    line-height: 1.75;
+    max-width: 540px;
+    margin-bottom: 36px;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+/* 히어로 우측 카드 (장식적 인포 카드) */
+.hero-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent), #818cf8);
+}
+
+.hero-card-label {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 20px;
+}
+
+.hero-card-list {
+    display: grid;
+    gap: 16px;
+}
+
+.hero-card-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 14px;
+    border-bottom: 1px dashed var(--border);
+}
+
+.hero-card-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.hero-card-key {
+    font-size: 0.88rem;
+    color: var(--text-soft);
+}
+
+.hero-card-val {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+
+/* ===== 7. 섹션 헤딩 ========================================== */
+.section-heading {
+    margin-bottom: 56px;
+    max-width: 720px;
+}
+
+.section-eyebrow {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--accent);
+    margin-bottom: 12px;
+    padding: 4px 10px;
+    background: var(--accent-soft);
+    border-radius: 999px;
+}
+
+.section-title {
+    font-size: clamp(1.75rem, 3.5vw, 2.4rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+    margin-bottom: 12px;
+}
+
+.section-desc {
+    font-size: 1rem;
+    color: var(--text-soft);
+    line-height: 1.7;
+}
+
+/* 페이지 최상단 타이틀 (About / Portfolio / Contact) */
+.page-header {
+    padding: 80px 0 40px;
+    border-bottom: 1px solid var(--border-soft);
+}
+
+
+/* ===== 8. 스킬 리스트 ========================================== */
+.skill-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+.skill-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+    transition: transform var(--t-base),
+                box-shadow var(--t-base),
+                border-color var(--t-base);
+}
+
+.skill-item:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent);
+    box-shadow: var(--shadow);
+}
+
+.skill-logos {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 18px;
+    align-items: center;
+}
+
+.skill-logo {
+    width: 36px;
+    height: 36px;
+    padding: 6px;
+    background: var(--bg);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-soft);
+    object-fit: contain;
+}
+
+.skill-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+}
+
+.skill-desc {
+    font-size: 0.92rem;
+    color: var(--text-soft);
+    line-height: 1.65;
+}
+
+
+/* ===== 9. 학력 타임라인 (About) ============================== */
+.timeline {
+    display: grid;
+    gap: 12px;
+    position: relative;
+}
+
+.timeline-item {
+    display: grid;
+    grid-template-columns: 56px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 20px 24px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    transition: border-color var(--t-base),
+                transform var(--t-base);
+}
+
+.timeline-item:hover {
+    border-color: var(--accent);
+    transform: translateX(4px);
+}
+
+.timeline-mark {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    color: var(--accent);
+    display: grid;
+    place-items: center;
+    font-weight: 800;
+    font-size: 1.25rem;
+    border: 2px solid var(--accent);
+}
+
+.timeline-body h3 {
+    font-size: 1.02rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.timeline-body p {
+    font-size: 0.88rem;
+    color: var(--text-soft);
+}
+
+.timeline-period {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+
+
+/* ===== 10. 관심사 태그 (About) =============================== */
+.interest-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
+}
+
+.interest-tag {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 18px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    transition: all var(--t-base);
+}
+
+.interest-tag:hover {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+}
+
+.interest-emoji {
+    font-size: 1.4rem;
+}
+
+.interest-label {
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+
+/* ===== 11. 프로젝트 카드 (Portfolio) ========================= */
+.project-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+}
+
+@media (min-width: 720px) {
+    .project-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.project-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: transform var(--t-base),
+                box-shadow var(--t-base),
+                border-color var(--t-base);
+    display: flex;
+    flex-direction: column;
+}
+
+.project-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--accent);
+    box-shadow: var(--shadow-lg);
+}
+
+.project-cover {
+    aspect-ratio: 16 / 9;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
+    position: relative;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-family: var(--font-mono);
+    font-size: 1.05rem;
+    letter-spacing: 0.05em;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    overflow: hidden;
+}
+
+.project-cover::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,0.2), transparent 40%),
+        radial-gradient(circle at 80% 80%, rgba(0,0,0,0.15),    transparent 40%);
+}
+
+/* 카드 별 다른 그라디언트로 시각적 다양성 */
+.project-card:nth-child(2) .project-cover {
+    background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
+}
+.project-card:nth-child(3) .project-cover {
+    background: linear-gradient(135deg, #f97316 0%, #ef4444 100%);
+}
+.project-card:nth-child(4) .project-cover {
+    background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+}
+
+.project-body {
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    flex: 1;
+}
+
+.project-meta {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.project-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    line-height: 1.3;
+}
+
+.project-desc {
+    font-size: 0.95rem;
+    color: var(--text-soft);
+    line-height: 1.7;
+    flex: 1;
+}
+
+.project-stack {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.stack-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--text-soft);
+}
+
+.stack-tag img {
+    width: 14px;
+    height: 14px;
+}
+
+.project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 4px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--accent);
+}
+
+.project-link:hover {
+    color: var(--accent-hover);
+}
+
+
+/* ===== 12. 컨택트 카드 & 폼 (Contact) ======================== */
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+}
+
+@media (min-width: 880px) {
+    .contact-grid {
+        grid-template-columns: 1fr 1.4fr;
+    }
+}
+
+.contact-info {
+    display: grid;
+    gap: 16px;
+    align-content: start;
+}
+
+.contact-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    transition: border-color var(--t-base),
+                transform var(--t-base);
+}
+
+.contact-card:hover {
+    border-color: var(--accent);
+    transform: translateX(4px);
+}
+
+.contact-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-sm);
+    background: var(--accent-soft);
+    color: var(--accent);
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+}
+
+.contact-icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+.contact-card-label {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    letter-spacing: 0.04em;
+    margin-bottom: 2px;
+}
+
+.contact-card-value {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text);
+}
+
+/* 컨택트 폼 */
+.contact-form {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    display: grid;
+    gap: 18px;
+}
+
+.form-row {
+    display: grid;
+    gap: 6px;
+}
+
+.form-row label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-soft);
+}
+
+.form-row label .required {
+    color: var(--accent);
+    margin-left: 2px;
+}
+
+.form-row input,
+.form-row textarea {
+    width: 100%;
+    padding: 12px 14px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 0.95rem;
+    transition: border-color var(--t-base),
+                background var(--t-base);
+}
+
+.form-row input:focus,
+.form-row textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    background: var(--surface);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.form-row textarea {
+    resize: vertical;
+    min-height: 120px;
+    font-family: inherit;
+}
+
+/* 검증 실패 상태 */
+.form-row.has-error input,
+.form-row.has-error textarea {
+    border-color: #ef4444;
+    background: #fef2f2;
+}
+
+.form-error {
+    font-size: 0.82rem;
+    color: #ef4444;
+    margin-top: 2px;
+    min-height: 1em;
+}
+
+/* 폼 전송 결과 메시지 */
+.form-result {
+    padding: 14px 16px;
+    border-radius: var(--radius-sm);
+    font-size: 0.92rem;
+    display: none;
+}
+
+.form-result.is-success {
+    display: block;
+    background: #ecfdf5;
+    color: #047857;
+    border: 1px solid #6ee7b7;
+}
+
+
+/* ===== 13. 사이트 푸터 ========================================== */
+.site-footer {
+    margin-top: 96px;
+    padding: 56px 0 32px;
+    background: var(--text);
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.footer-inner {
+    display: grid;
+    gap: 32px;
+    grid-template-columns: 1fr;
+}
+
+@media (min-width: 720px) {
+    .footer-inner {
+        grid-template-columns: 1.5fr 1fr 1fr;
+    }
+}
+
+.footer-brand-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: #fff;
+}
+
+.footer-brand-desc {
+    font-size: 0.92rem;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.6;
+    max-width: 320px;
+}
+
+.footer-col h4 {
+    font-size: 0.78rem;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 14px;
+}
+
+.footer-col ul {
+    display: grid;
+    gap: 8px;
+}
+
+.footer-col a {
+    font-size: 0.92rem;
+    color: rgba(255, 255, 255, 0.85);
+    transition: color var(--t-base);
+}
+
+.footer-col a:hover {
+    color: var(--accent);
+}
+
+.footer-bottom {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 0.82rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-family: var(--font-mono);
+}
+
+
+/* ===== 14. 애니메이션 ========================================== */
+/* 스크롤 페이드인 — JS의 IntersectionObserver가 .is-visible 클래스 부여 */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.fade-in.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 히어로 진입 애니메이션 (단계적) */
+.hero-eyebrow,
+.hero-title,
+.hero-role,
+.hero-intro,
+.hero-actions,
+.hero-card {
+    animation: fadeUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) backwards;
+}
+
+.hero-eyebrow { animation-delay: 0.05s; }
+.hero-title   { animation-delay: 0.15s; }
+.hero-role    { animation-delay: 0.25s; }
+.hero-intro   { animation-delay: 0.35s; }
+.hero-actions { animation-delay: 0.45s; }
+.hero-card    { animation-delay: 0.55s; }
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes blink {
+    0%, 50%   { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+@keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0    var(--accent-soft); }
+    50%      { box-shadow: 0 0 0 8px  rgba(79, 70, 229, 0); }
+}
+
+
+/* ===== 15. 반응형 ============================================ */
+@media (max-width: 720px) {
+    .container,
+    .container-narrow {
+        padding: 0 20px;
+    }
+
+    .section {
+        padding: 64px 0;
+    }
+
+    .hero {
+        padding: 64px 0 48px;
+    }
+
+    .header-inner {
+        height: 60px;
+    }
+
+    .primary-nav a {
+        padding: 6px 10px;
+        font-size: 0.85rem;
+    }
+
+    .brand-suffix {
+        display: none;
+    }
+
+    .timeline-item {
+        grid-template-columns: 44px 1fr;
+        gap: 14px;
+    }
+
+    .timeline-mark {
+        width: 44px;
+        height: 44px;
+        font-size: 1rem;
+    }
+
+    .timeline-period {
+        grid-column: 2;
+        margin-top: 4px;
+    }
+
+    .footer-bottom {
+        justify-content: center;
+        text-align: center;
+    }
+}
+
+
+/* ===== 16. 접근성 ============================================ */
+/* 사용자가 시스템 설정에서 모션을 줄이도록 설정한 경우, 모든 애니메이션 비활성화 */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* 키보드 포커스 스타일 (마우스 클릭 시엔 안 보이게) */
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: var(--radius-sm);
+}
