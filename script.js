@@ -243,3 +243,91 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 }); // end of DOMContentLoaded
+
+/* ===== 6. Portfolio 검색 / 정렬 / 카테고리 필터 ================ */
+document.addEventListener('DOMContentLoaded', function () {
+    var projectGrid = document.getElementById('project-grid');
+    if (!projectGrid) return;
+
+    var cards = Array.prototype.slice.call(projectGrid.querySelectorAll('.project-card'));
+    var searchInput = document.getElementById('project-search');
+    var sortSelect = document.getElementById('project-sort');
+    var categoryButtons = document.querySelectorAll('[data-category-filter]');
+    var resultText = document.getElementById('portfolio-result-text');
+    var emptyText = document.getElementById('portfolio-empty');
+    var currentCategory = 'all';
+
+    function normalize(text) {
+        return (text || '').toString().toLowerCase().replace(/\s+/g, ' ').trim();
+    }
+
+    function getSearchText(card) {
+        return normalize([
+            card.dataset.title,
+            card.dataset.category,
+            card.dataset.date,
+            card.textContent
+        ].join(' '));
+    }
+
+    function sortCards(mode) {
+        var sorted = cards.slice().sort(function (a, b) {
+            if (mode === 'date') {
+                return (b.dataset.date || '').localeCompare(a.dataset.date || '');
+            }
+
+            var categoryCompare = (a.dataset.category || '').localeCompare(b.dataset.category || '', 'ko');
+            if (categoryCompare !== 0) return categoryCompare;
+            return (b.dataset.date || '').localeCompare(a.dataset.date || '');
+        });
+
+        sorted.forEach(function (card) {
+            projectGrid.appendChild(card);
+        });
+    }
+
+    function renderProjects() {
+        var query = normalize(searchInput ? searchInput.value : '');
+        var visibleCount = 0;
+
+        sortCards(sortSelect ? sortSelect.value : 'category');
+
+        cards.forEach(function (card) {
+            var categoryMatch = currentCategory === 'all' || card.dataset.category === currentCategory;
+            var searchMatch = query === '' || getSearchText(card).indexOf(query) !== -1;
+            var isVisible = categoryMatch && searchMatch;
+
+            card.classList.toggle('is-hidden', !isVisible);
+            if (isVisible) visibleCount++;
+        });
+
+        if (resultText) {
+            var categoryLabel = currentCategory === 'all' ? '전체' : currentCategory;
+            var searchLabel = query ? ' · 검색어: ' + query : '';
+            resultText.textContent = categoryLabel + ' 기준으로 ' + visibleCount + '개 프로젝트를 표시합니다.' + searchLabel;
+        }
+
+        if (emptyText) {
+            emptyText.hidden = visibleCount !== 0;
+        }
+    }
+
+    categoryButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+            currentCategory = button.dataset.categoryFilter;
+            categoryButtons.forEach(function (btn) { btn.classList.remove('is-active'); });
+            button.classList.add('is-active');
+            renderProjects();
+        });
+    });
+
+    if (searchInput) {
+        searchInput.addEventListener('input', renderProjects);
+    }
+
+    if (sortSelect) {
+        sortSelect.addEventListener('change', renderProjects);
+    }
+
+    renderProjects();
+});

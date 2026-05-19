@@ -70,15 +70,36 @@
           프로젝트 목록
         </h2>
 
-        <div class="project-grid">
+
+        <div class="portfolio-toolbar" aria-label="프로젝트 검색 및 정렬">
+          <div class="portfolio-filter-group" role="group" aria-label="카테고리 필터">
+            <button type="button" class="portfolio-chip is-active" data-category-filter="all">전체</button>
+            <button type="button" class="portfolio-chip" data-category-filter="ERP">ERP</button>
+            <button type="button" class="portfolio-chip" data-category-filter="웹프로그래밍">웹프로그래밍</button>
+            <button type="button" class="portfolio-chip" data-category-filter="바이브코딩">바이브코딩</button>
+          </div>
+          <div class="portfolio-control-group">
+            <label class="portfolio-search-label" for="project-search">프로젝트 검색</label>
+            <input id="project-search" class="portfolio-search" type="search" placeholder="프로젝트명, 기술, 설명 검색" autocomplete="off">
+            <label class="portfolio-sort-label" for="project-sort">정렬 기준</label>
+            <select id="project-sort" class="portfolio-sort">
+              <option value="category">카테고리별</option>
+              <option value="date">날짜별</option>
+            </select>
+          </div>
+        </div>
+
+        <p class="portfolio-result-text" id="portfolio-result-text">전체 프로젝트를 표시하고 있습니다.</p>
+
+        <div class="project-grid" id="project-grid">
 
           <!-- 프로젝트 1 — 본 포트폴리오 사이트 (메타!) -->
-          <article class="project-card fade-in">
+          <article class="project-card fade-in" data-category="웹프로그래밍" data-date="2026-05" data-title="Personal Portfolio Website 개인 포트폴리오 웹사이트">
             <div class="project-cover" aria-hidden="true">
               &lt;/&gt;&nbsp;portfolio
             </div>
             <div class="project-body">
-              <p class="project-meta">2026 · Web</p>
+              <p class="project-meta">2026 · 웹프로그래밍</p>
               <h3 class="project-title">Personal Portfolio Website</h3>
               <p class="project-desc">
                 지금 보고 계신 이 사이트입니다. 인터넷활용 수업 과제로 시작해
@@ -103,7 +124,7 @@
           </article>
 
           <!-- 프로젝트 2 — SAP MM -->
-          <article class="project-card fade-in">
+          <article class="project-card fade-in" data-category="ERP" data-date="2025-07" data-title="SAP MM 자격 학습 프로젝트">
             <div class="project-cover" aria-hidden="true">
               SAP&nbsp;MM
             </div>
@@ -125,7 +146,7 @@
           </article>
 
           <!-- 프로젝트 3 — SAP ABAP -->
-          <article class="project-card fade-in">
+          <article class="project-card fade-in" data-category="ERP" data-date="2026-01" data-title="SAP ABAP 자격 학습 프로젝트">
             <div class="project-cover" aria-hidden="true">
               SAP&nbsp;ABAP
             </div>
@@ -148,12 +169,12 @@
           </article>
 
           <!-- 프로젝트 4 — 데이터 자동화 -->
-          <article class="project-card fade-in">
+          <article class="project-card fade-in" data-category="바이브코딩" data-date="2025-10" data-title="개인 데이터 자동화 도구 Vibe Coding">
             <div class="project-cover" aria-hidden="true">
               data&nbsp;ops
             </div>
             <div class="project-body">
-              <p class="project-meta">2025 · Data / Automation</p>
+              <p class="project-meta">2025 · 바이브코딩</p>
               <h3 class="project-title">개인 데이터 자동화 도구</h3>
               <p class="project-desc">
                 Excel 과 Python 을 활용해 반복적인 데이터 정리 작업을
@@ -174,12 +195,12 @@
 
 
           <!-- 실습 1 — D-Day 계산기 -->
-          <article class="project-card fade-in">
+          <article class="project-card fade-in" data-category="웹프로그래밍" data-date="2026-06" data-title="Project Deadline D-Day Calculator 디데이 계산기">
             <div class="project-cover" aria-hidden="true">
               D-Day
             </div>
             <div class="project-body">
-              <p class="project-meta">2026 · JavaScript Practice</p>
+              <p class="project-meta">2026 · 웹프로그래밍</p>
               <h3 class="project-title">Project Deadline D-Day Calculator</h3>
               <p class="project-desc">
                 Date 객체와 Math 객체를 활용해 과제, 시험, 발표일 같은 목표 날짜까지
@@ -199,12 +220,12 @@
           </article>
 
           <!-- 실습 2 — 저녁 메뉴 랜덤 뽑기 -->
-          <article class="project-card fade-in">
+          <article class="project-card fade-in" data-category="웹프로그래밍" data-date="2026-06" data-title="Dinner Menu Random Picker 저녁 메뉴 랜덤 뽑기">
             <div class="project-cover" aria-hidden="true">
               dinner&nbsp;pick
             </div>
             <div class="project-body">
-              <p class="project-meta">2026 · JavaScript Practice</p>
+              <p class="project-meta">2026 · 웹프로그래밍</p>
               <h3 class="project-title">Dinner Menu Random Picker</h3>
               <p class="project-desc">
                 콤마로 입력한 저녁 메뉴 후보를 배열로 변환한 뒤,
@@ -224,6 +245,8 @@
           </article>
 
         </div>
+
+        <p class="portfolio-empty" id="portfolio-empty" hidden>검색 조건에 맞는 프로젝트가 없습니다.</p>
 
         <!-- 더 많은 프로젝트 안내 -->
         <p style="text-align: center; margin-top: 64px; color: var(--text-muted); font-family: var(--font-mono); font-size: 0.9rem;">
