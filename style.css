@@ -2603,3 +2603,127 @@ textarea {
     border-color: #0ea5e9 !important;
     box-shadow: 0 12px 28px rgba(14, 165, 233, 0.20) !important;
 }
+
+/* ===== Portfolio toolbar final spacing / category colors ===== */
+.portfolio-page-header {
+    padding-bottom: 26px !important;
+}
+
+.portfolio-page-header + .portfolio-section {
+    padding-top: 26px !important;
+}
+
+.portfolio-toolbar {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 14px !important;
+    margin: 0 0 28px !important;
+    max-width: 100% !important;
+}
+
+.portfolio-filter-group {
+    justify-content: flex-start !important;
+    gap: 8px !important;
+}
+
+.portfolio-control-group {
+    justify-content: flex-start !important;
+    align-items: center !important;
+    gap: 10px !important;
+    flex-wrap: wrap !important;
+}
+
+.portfolio-search-wrap {
+    width: min(360px, 100%) !important;
+}
+
+.portfolio-search-icon {
+    display: none !important;
+}
+
+.portfolio-search {
+    padding: 0 16px !important;
+}
+
+.portfolio-sort {
+    width: 190px !important;
+}
+
+.portfolio-chip[data-category-filter="ERP"] {
+    border-color: rgba(249, 115, 22, 0.28) !important;
+}
+
+.portfolio-chip[data-category-filter="ERP"]:hover {
+    color: #ea580c !important;
+    border-color: #f97316 !important;
+}
+
+.portfolio-chip[data-category-filter="웹프로그래밍"] {
+    border-color: rgba(109, 93, 252, 0.28) !important;
+}
+
+.portfolio-chip[data-category-filter="웹프로그래밍"]:hover {
+    color: #6d5dfc !important;
+    border-color: #6d5dfc !important;
+}
+
+.portfolio-chip[data-category-filter="바이브코딩"] {
+    border-color: rgba(14, 165, 233, 0.28) !important;
+}
+
+.portfolio-chip[data-category-filter="바이브코딩"]:hover {
+    color: #0284c7 !important;
+    border-color: #0ea5e9 !important;
+}
+
+.project-card[data-category="웹프로그래밍"] {
+    --category-main: #6d5dfc !important;
+    --category-sub: #a78bfa !important;
+    --category-soft: rgba(109, 93, 252, 0.10) !important;
+}
+
+.project-card[data-category="ERP"] {
+    --category-main: #f97316 !important;
+    --category-sub: #fb923c !important;
+    --category-soft: rgba(249, 115, 22, 0.11) !important;
+}
+
+.project-card[data-category="바이브코딩"] {
+    --category-main: #0ea5e9 !important;
+    --category-sub: #38bdf8 !important;
+    --category-soft: rgba(14, 165, 233, 0.11) !important;
+}
+
+.project-card[data-category] {
+    border-top: 4px solid var(--category-main) !important;
+}
+
+.project-card[data-category] .project-cover {
+    background: linear-gradient(135deg, var(--category-main) 0%, var(--category-sub) 100%) !important;
+}
+
+.project-card[data-category] .project-meta,
+.project-card[data-category] .project-link {
+    color: var(--category-main) !important;
+}
+
+.project-card[data-category] .stack-tag {
+    background: var(--category-soft) !important;
+    border-color: color-mix(in srgb, var(--category-main) 24%, var(--border)) !important;
+}
+
+@media (max-width: 560px) {
+    .portfolio-page-header {
+        padding-bottom: 22px !important;
+    }
+
+    .portfolio-page-header + .portfolio-section {
+        padding-top: 22px !important;
+    }
+
+    .portfolio-sort,
+    .portfolio-search-wrap {
+        width: 100% !important;
+    }
+}
