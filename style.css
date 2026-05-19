@@ -1991,3 +1991,234 @@ textarea {
         width: 100%;
     }
 }
+
+/* ===== 20. 실습 페이지 버튼/간격 최종 보정 ================================= */
+.compact-practice-section .compact-card,
+.compact-practice-section .menu-editor-v2 {
+    border-radius: 28px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    box-shadow: var(--shadow-sm);
+}
+
+.compact-practice-section .practice-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 34px;
+    padding: 8px 15px;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+}
+
+.dday-board-layout-v2 {
+    align-items: start;
+    gap: 22px;
+}
+
+.dday-list-panel {
+    padding: 24px !important;
+}
+
+.dday-list-v2 {
+    display: grid;
+    gap: 10px !important;
+}
+
+.dday-row-card {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    align-items: center !important;
+    column-gap: 14px !important;
+    padding: 13px 14px !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 16px !important;
+    background: var(--bg) !important;
+    box-shadow: none !important;
+}
+
+.dday-row-title {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    margin: 0 0 3px !important;
+    min-width: 0 !important;
+}
+
+.dday-row-title strong {
+    min-width: 48px !important;
+    color: var(--accent) !important;
+    font-family: var(--font-mono) !important;
+    font-size: 0.94rem !important;
+    font-weight: 850 !important;
+    letter-spacing: -0.04em !important;
+}
+
+.dday-row-title span {
+    overflow: hidden !important;
+    color: var(--text) !important;
+    font-size: 0.96rem !important;
+    font-weight: 800 !important;
+    line-height: 1.25 !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+}
+
+.dday-row-desc {
+    margin: 0 !important;
+    color: var(--text-muted) !important;
+    font-size: 0.8rem !important;
+    line-height: 1.35 !important;
+}
+
+.dday-delete,
+.dday-row-card .dday-delete {
+    appearance: none !important;
+    min-height: 30px !important;
+    padding: 0 11px !important;
+    border: 1px solid rgba(220, 38, 38, 0.22) !important;
+    border-radius: 999px !important;
+    background: rgba(220, 38, 38, 0.08) !important;
+    color: #dc2626 !important;
+    font-family: inherit !important;
+    font-size: 0.75rem !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.02em !important;
+    cursor: pointer !important;
+}
+
+.dday-delete:hover,
+.dday-row-card .dday-delete:hover {
+    border-color: #dc2626 !important;
+    background: #dc2626 !important;
+    color: #fff !important;
+}
+
+.dinner-stack-layout {
+    max-width: 920px !important;
+    gap: 18px !important;
+}
+
+.dinner-flow-card {
+    padding: 30px !important;
+    gap: 20px !important;
+}
+
+.category-grid-v2 {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+}
+
+.category-grid-v2 .category-card {
+    appearance: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-height: 54px !important;
+    padding: 13px 16px !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 16px !important;
+    background: var(--bg) !important;
+    color: var(--text) !important;
+    font-family: inherit !important;
+    font-size: 0.95rem !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.03em !important;
+    box-shadow: none !important;
+}
+
+.category-grid-v2 .category-card:hover,
+.category-grid-v2 .category-card:focus-visible {
+    transform: translateY(-1px) !important;
+    border-color: var(--accent) !important;
+    background: var(--accent-soft) !important;
+    color: var(--accent) !important;
+}
+
+.category-grid-v2 .category-card.is-active {
+    border-color: var(--accent) !important;
+    background: var(--accent) !important;
+    color: #fff !important;
+    box-shadow: 0 10px 24px rgba(79, 70, 229, 0.18) !important;
+}
+
+.dinner-action-area {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    text-align: center !important;
+}
+
+.dinner-action-area span {
+    display: inline-flex !important;
+    justify-self: center !important;
+    padding: 8px 14px !important;
+    border-radius: 999px !important;
+    background: var(--accent-soft) !important;
+    color: var(--accent) !important;
+    font-size: 0.88rem !important;
+    font-weight: 800 !important;
+}
+
+.dinner-action-area .btn {
+    justify-self: center !important;
+    min-width: 190px !important;
+    min-height: 48px !important;
+    border-radius: 14px !important;
+    font-weight: 800 !important;
+}
+
+.dinner-result-card {
+    min-height: 180px !important;
+    padding: 26px !important;
+    border-radius: 24px !important;
+    box-shadow: var(--shadow-sm) !important;
+}
+
+.dinner-result-card .random-choice {
+    margin: 2px 0 6px !important;
+    font-size: clamp(2.2rem, 6vw, 3.8rem) !important;
+}
+
+.menu-editor-v2 summary {
+    list-style-position: inside;
+    cursor: pointer;
+    color: var(--text);
+    font-weight: 850;
+    letter-spacing: -0.03em;
+}
+
+.menu-editor-v2 summary::marker {
+    color: var(--accent);
+}
+
+@media (max-width: 760px) {
+    .category-grid-v2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+}
+
+@media (max-width: 560px) {
+    .dday-row-card {
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+    }
+
+    .dday-delete {
+        justify-self: start !important;
+    }
+
+    .category-grid-v2 {
+        grid-template-columns: 1fr !important;
+    }
+}
