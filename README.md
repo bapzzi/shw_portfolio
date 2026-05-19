@@ -1,6 +1,6 @@
 # 신해원 포트폴리오 (Shin Haewon Portfolio)
 
-광운대학교 경영학부 인터넷활용 수업 과제로 제작한 개인 포트폴리오 사이트입니다.
+광운대학교 인터넷활용 수업 과제로 제작한 개인 포트폴리오 사이트입니다.
 실제로 GitHub Pages 등에 배포해 사용할 수 있는 수준으로 만들었습니다.
 
 🔗 **Live**: https://bapzzi.github.io _(배포 후 활성화)_
@@ -84,23 +84,6 @@ shw_portfolio/
 | 텍스트 컬러 | `#18181b` (거의 검정) |
 | 배경 | `#fafaf9` (살짝 따뜻한 흰색) |
 | 컨테이너 너비 | `1080px` |
-
----
-
-## 🚀 GitHub Pages 배포 방법
-
-```bash
-# 1. 이 폴더를 깃허브에 푸시
-cd shw_portfolio
-git init
-git add .
-git commit -m "Initial portfolio"
-git branch -M main
-git remote add origin https://github.com/bapzzi/bapzzi.github.io.git
-git push -u origin main
-```
-
-푸시 후 1~2분이면 `https://bapzzi.github.io` 에서 확인 가능합니다.
 
 ---
 
