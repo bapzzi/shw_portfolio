@@ -1718,3 +1718,276 @@ textarea {
         grid-column: 2;
     }
 }
+
+/* ===== 20. 실습 페이지 로직 수정 반영 ================================= */
+.dday-board-layout-v2 {
+    grid-template-columns: minmax(300px, 0.72fr) minmax(0, 1.28fr);
+    gap: 20px;
+}
+
+.dday-list-panel {
+    min-height: 320px;
+}
+
+.dday-list-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.dday-list-head > p {
+    margin: 4px 0 0;
+    padding: 7px 11px;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-size: 0.82rem;
+    font-weight: 850;
+    white-space: nowrap;
+}
+
+.form-message {
+    min-height: 20px;
+    color: var(--text-muted);
+    font-size: 0.88rem;
+}
+
+.dday-list-v2 {
+    gap: 9px;
+}
+
+.dday-row-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 14px;
+    padding: 13px 14px;
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    background: var(--bg);
+    transition: transform var(--t-base), border-color var(--t-base), box-shadow var(--t-base);
+}
+
+.dday-row-card:hover {
+    transform: translateY(-1px);
+    border-color: var(--accent);
+    box-shadow: var(--shadow-sm);
+}
+
+.dday-row-card.is-today {
+    border-color: var(--accent);
+    background: linear-gradient(135deg, var(--accent-soft), transparent 55%), var(--bg);
+}
+
+.dday-row-card.is-past {
+    opacity: 0.72;
+}
+
+.dday-row-main {
+    min-width: 0;
+}
+
+.dday-row-title {
+    display: flex;
+    align-items: baseline;
+    gap: 9px;
+    min-width: 0;
+    margin: 0 0 4px;
+    line-height: 1.25;
+}
+
+.dday-row-title strong {
+    flex: 0 0 auto;
+    min-width: 54px;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    letter-spacing: -0.05em;
+}
+
+.dday-row-title span {
+    overflow: hidden;
+    color: var(--text);
+    font-size: 1rem;
+    font-weight: 850;
+    letter-spacing: -0.035em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.dday-row-desc {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.86rem;
+    line-height: 1.35;
+}
+
+.dday-delete {
+    min-height: auto;
+    padding: 6px 9px;
+    border: 1px solid rgba(239, 68, 68, 0.28);
+    border-radius: 999px;
+    background: rgba(239, 68, 68, 0.08);
+    color: #dc2626;
+    font-size: 0.78rem;
+    font-weight: 850;
+    cursor: pointer;
+    transition: background var(--t-base), color var(--t-base), border-color var(--t-base);
+}
+
+.dday-delete:hover {
+    border-color: #dc2626;
+    background: #dc2626;
+    color: #fff;
+}
+
+.empty-state {
+    padding: 18px;
+    border: 1px dashed var(--border);
+    border-radius: 15px;
+    color: var(--text-muted);
+    text-align: center;
+}
+
+.dinner-stack-layout {
+    display: grid;
+    gap: 18px;
+    max-width: 980px;
+}
+
+.dinner-flow-card {
+    display: grid;
+    gap: 22px;
+}
+
+.center-head {
+    margin-bottom: 0;
+    text-align: center;
+}
+
+.center-head .practice-badge {
+    margin-inline: auto;
+}
+
+.center-head p {
+    max-width: 620px;
+    margin-inline: auto;
+}
+
+.category-grid-v2 {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.category-grid-v2 .category-card {
+    min-height: 72px;
+    border-radius: 16px;
+    font-size: 0.98rem;
+}
+
+.dinner-action-area {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 14px;
+    padding: 16px;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    background: var(--bg);
+}
+
+.dinner-action-area span {
+    color: var(--accent);
+    font-size: 0.95rem;
+    font-weight: 850;
+}
+
+.dinner-result-card {
+    position: static;
+    min-height: 220px;
+    align-items: center;
+    padding: 28px;
+    text-align: center;
+}
+
+.dinner-result-card .hero-card-label {
+    align-self: center;
+}
+
+.dinner-result-card h2 {
+    margin-bottom: 2px;
+}
+
+.dinner-result-card .random-choice {
+    margin: 6px 0 4px;
+    font-size: clamp(2.3rem, 7vw, 4.4rem);
+    line-height: 1;
+}
+
+.menu-editor-v2 {
+    margin-top: 0;
+    background: var(--surface);
+    box-shadow: var(--shadow-sm);
+}
+
+.menu-editor-v2 summary {
+    padding: 18px 20px;
+    font-size: 1.02rem;
+}
+
+.editor-body-v2 {
+    padding: 0 20px 20px;
+}
+
+.menu-edit-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.menu-edit-grid label {
+    display: grid;
+    gap: 8px;
+    margin: 0;
+    color: var(--text);
+    font-size: 0.92rem;
+    font-weight: 850;
+}
+
+.menu-edit-grid textarea {
+    min-height: 92px;
+    resize: vertical;
+}
+
+@media (max-width: 1040px) {
+    .category-grid-v2 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 900px) {
+    .dday-board-layout-v2 {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .dday-row-card,
+    .dinner-action-area {
+        grid-template-columns: 1fr;
+    }
+
+    .dday-delete {
+        justify-self: start;
+    }
+
+    .category-grid-v2,
+    .menu-edit-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dinner-action-area .btn {
+        width: 100%;
+    }
+}

@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>D-Day 계산기 · 신해원 포트폴리오</title>
-  <meta name="description" content="프로젝트별 마감 일정을 한 번에 계산하는 D-Day 계산기." />
+  <meta name="description" content="프로젝트별 마감 일정을 여러 개 등록하고 관리하는 D-Day 계산기." />
   <link rel="stylesheet" as="style" crossorigin
         href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,17 +33,17 @@
       <div class="container">
         <span class="section-eyebrow">JavaScript Practice 01</span>
         <h1 class="section-title">Project D-Day Board</h1>
-        <p class="section-desc">과제, 시험, 발표처럼 여러 목표 일정을 한 화면에서 관리하는 D-Day 계산기입니다.</p>
+        <p class="section-desc">과제, 시험, 발표처럼 여러 목표 일정을 추가하고 삭제할 수 있는 D-Day 관리 페이지입니다.</p>
       </div>
     </section>
 
     <section class="compact-practice-section">
-      <div class="container dday-board-layout">
+      <div class="container dday-board-layout dday-board-layout-v2">
         <article class="practice-panel compact-card fade-in">
           <div class="practice-panel-head compact-head">
-            <span class="practice-badge">D-Day Manager</span>
-            <h2>일정 추가하기</h2>
-            <p>목표 이름과 날짜를 입력하면 아래 보드에 D-Day 카드가 추가됩니다.</p>
+            <span class="practice-badge">D-Day Add</span>
+            <h2>새 D-Day 추가</h2>
+            <p>목표 이름과 날짜가 모두 같은 경우만 기존 항목으로 보고, 그 외에는 새로운 D-Day로 등록됩니다.</p>
           </div>
 
           <form class="practice-form compact-form" id="dday-form">
@@ -61,17 +61,20 @@
                 <input id="base-date" type="date" required />
               </div>
             </div>
-            <button class="btn btn-primary compact-button" type="submit">D-Day 카드 추가</button>
+            <button class="btn btn-primary compact-button" type="submit">D-Day 추가하기</button>
+            <p class="form-message" id="dday-message" aria-live="polite"></p>
           </form>
         </article>
 
-        <article class="practice-panel compact-card fade-in">
-          <div class="practice-panel-head compact-head">
-            <span class="practice-badge">Saved Schedule</span>
-            <h2>프로젝트별 D-Day</h2>
-            <p>기본 예시와 직접 추가한 목표 일정이 함께 표시됩니다.</p>
+        <article class="practice-panel compact-card fade-in dday-list-panel">
+          <div class="practice-panel-head compact-head dday-list-head">
+            <div>
+              <span class="practice-badge">D-Day List</span>
+              <h2>등록된 D-Day</h2>
+            </div>
+            <p id="dday-count">0개 등록</p>
           </div>
-          <div class="dday-list" id="dday-list" aria-live="polite"></div>
+          <div class="dday-list dday-list-v2" id="dday-list" aria-live="polite"></div>
         </article>
       </div>
     </section>
@@ -114,12 +117,15 @@
       var targetInput = document.getElementById('target-date');
       var baseInput = document.getElementById('base-date');
       var listEl = document.getElementById('dday-list');
+      var countEl = document.getElementById('dday-count');
+      var messageEl = document.getElementById('dday-message');
 
       var schedules = [
-        { name: '웹프로그래밍 포트폴리오 제출', date: '2026-06-25' },
-        { name: '인터넷활용 기말 정리', date: '2026-06-18' },
-        { name: 'ERP 팀 프로젝트 발표', date: '2026-06-12' }
+        { id: 1, name: '웹프로그래밍 포트폴리오 제출', date: '2026-06-25' },
+        { id: 2, name: '인터넷활용 기말 정리', date: '2026-06-18' },
+        { id: 3, name: 'ERP 팀 프로젝트 발표', date: '2026-06-12' }
       ];
+      var nextId = 4;
 
       function toInputDate(date) {
         var year = date.getFullYear();
@@ -128,8 +134,9 @@
         return year + '-' + month + '-' + day;
       }
 
-      function formatDate(date) {
-        return date.toLocaleDateString('ko-KR', { month: 'long', day: 'numeric', weekday: 'short' });
+      function formatDate(value) {
+        var date = new Date(value + 'T00:00:00');
+        return date.toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' });
       }
 
       function getDiffDay(targetValue, baseValue) {
@@ -145,64 +152,89 @@
         return 'D+' + Math.abs(diffDay);
       }
 
-      function getStatusText(diffDay) {
-        if (diffDay === 0) return '오늘 마감';
-        if (diffDay > 0) return diffDay + '일 남음';
-        return Math.abs(diffDay) + '일 지남';
+      function getDescText(item, diffDay) {
+        if (diffDay === 0) return formatDate(item.date) + ' 오늘이 목표 날짜입니다.';
+        if (diffDay > 0) return formatDate(item.date) + '까지 ' + diffDay + '일 남았습니다.';
+        return formatDate(item.date) + '에서 ' + Math.abs(diffDay) + '일 지났습니다.';
       }
 
       function renderList() {
-        var baseValue = baseInput.value;
+        var baseValue = baseInput.value || toInputDate(new Date());
         var sorted = schedules.slice().sort(function (a, b) {
           return getDiffDay(a.date, baseValue) - getDiffDay(b.date, baseValue);
         });
 
+        countEl.textContent = schedules.length + '개 등록';
         listEl.innerHTML = '';
 
-        sorted.forEach(function (item, index) {
-          var targetDate = new Date(item.date + 'T00:00:00');
+        if (sorted.length === 0) {
+          listEl.innerHTML = '<p class="empty-state">등록된 D-Day가 없습니다.</p>';
+          return;
+        }
+
+        sorted.forEach(function (item) {
           var diffDay = getDiffDay(item.date, baseValue);
           var card = document.createElement('div');
-          card.className = 'dday-mini-card';
+          card.className = 'dday-row-card';
           if (diffDay < 0) card.classList.add('is-past');
           if (diffDay === 0) card.classList.add('is-today');
 
           card.innerHTML =
-            '<div>' +
-              '<p class="dday-card-label">' + formatDate(targetDate) + '</p>' +
-              '<h3>' + item.name + '</h3>' +
-              '<p class="dday-card-desc">' + getStatusText(diffDay) + '</p>' +
+            '<div class="dday-row-main">' +
+              '<p class="dday-row-title"><strong>' + getDdayText(diffDay) + '</strong><span>' + item.name + '</span></p>' +
+              '<p class="dday-row-desc">' + getDescText(item, diffDay) + '</p>' +
             '</div>' +
-            '<strong>' + getDdayText(diffDay) + '</strong>' +
-            '<button type="button" aria-label="일정 삭제">×</button>';
-
-          card.querySelector('button').addEventListener('click', function () {
-            schedules.splice(index, 1);
-            renderList();
-          });
+            '<button class="dday-delete" type="button" data-id="' + item.id + '">삭제</button>';
 
           listEl.appendChild(card);
         });
       }
 
-      function setDefaultDates() {
-        var today = new Date();
-        targetInput.value = '2026-06-25';
-        baseInput.value = toInputDate(today);
+      function showMessage(text) {
+        messageEl.textContent = text;
+        window.clearTimeout(showMessage.timer);
+        showMessage.timer = window.setTimeout(function () {
+          messageEl.textContent = '';
+        }, 1800);
       }
 
       form.addEventListener('submit', function (event) {
         event.preventDefault();
-        schedules.push({
-          name: goalInput.value.trim() || '새 목표',
-          date: targetInput.value
+        var name = goalInput.value.trim();
+        var date = targetInput.value;
+
+        if (!name || !date) {
+          showMessage('목표 이름과 날짜를 모두 입력해 주세요.');
+          return;
+        }
+
+        var duplicate = schedules.find(function (item) {
+          return item.name === name && item.date === date;
         });
+
+        if (duplicate) {
+          showMessage('같은 이름과 같은 날짜의 D-Day가 이미 있어 목록만 새로 정리했습니다.');
+        } else {
+          schedules.push({ id: nextId++, name: name, date: date });
+          showMessage('새 D-Day가 추가되었습니다.');
+        }
+
         goalInput.value = '';
         renderList();
       });
 
+      listEl.addEventListener('click', function (event) {
+        if (!event.target.classList.contains('dday-delete')) return;
+        var id = Number(event.target.getAttribute('data-id'));
+        schedules = schedules.filter(function (item) {
+          return item.id !== id;
+        });
+        renderList();
+      });
+
       baseInput.addEventListener('change', renderList);
-      setDefaultDates();
+      targetInput.value = '2026-06-25';
+      baseInput.value = toInputDate(new Date());
       renderList();
     });
   </script>

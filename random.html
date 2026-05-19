@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>저녁 메뉴 랜덤 뽑기 · 신해원 포트폴리오</title>
-  <meta name="description" content="카테고리 기반 저녁 메뉴 랜덤 추천기." />
+  <meta name="description" content="카테고리 선택 후 저녁 메뉴를 하나 추천하는 랜덤 뽑기 페이지." />
   <link rel="stylesheet" as="style" crossorigin
         href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,20 +33,20 @@
       <div class="container">
         <span class="section-eyebrow">JavaScript Practice 02</span>
         <h1 class="section-title">Dinner Menu Picker</h1>
-        <p class="section-desc">카테고리만 선택하면 저녁 메뉴를 하나 추천하고, 필요할 때만 세부 메뉴를 수정할 수 있습니다.</p>
+        <p class="section-desc">카테고리를 먼저 고르고, 버튼을 누르면 오늘 저녁 메뉴 하나만 크게 추천합니다.</p>
       </div>
     </section>
 
     <section class="compact-practice-section">
-      <div class="container dinner-layout">
-        <article class="practice-panel compact-card fade-in">
-          <div class="practice-panel-head compact-head">
-            <span class="practice-badge">Category Select</span>
-            <h2>저녁 메뉴 카테고리</h2>
-            <p>후보 메뉴는 숨겨두고, 먼저 먹고 싶은 음식 종류만 선택합니다.</p>
+      <div class="container dinner-stack-layout">
+        <article class="practice-panel compact-card fade-in dinner-flow-card">
+          <div class="practice-panel-head compact-head center-head">
+            <span class="practice-badge">Step 01</span>
+            <h2>오늘 저녁 카테고리 선택</h2>
+            <p>세부 후보는 아래에서 수정할 수 있고, 기본 화면에서는 카테고리만 선택합니다.</p>
           </div>
 
-          <div class="category-grid" id="category-grid" aria-label="저녁 메뉴 카테고리 선택">
+          <div class="category-grid category-grid-v2" id="category-grid" aria-label="저녁 메뉴 카테고리 선택">
             <button type="button" class="category-card is-active" data-category="korean">한식</button>
             <button type="button" class="category-card" data-category="western">양식</button>
             <button type="button" class="category-card" data-category="chinese">중식</button>
@@ -55,35 +55,33 @@
             <button type="button" class="category-card" data-category="mixed">전체 랜덤</button>
           </div>
 
-          <button class="btn btn-primary compact-button wide-button" id="pick-dinner" type="button">오늘 저녁 뽑기</button>
+          <div class="dinner-action-area">
+            <span id="selected-category">한식 카테고리 선택 중</span>
+            <button class="btn btn-primary compact-button" id="pick-dinner" type="button">오늘 저녁 뽑기</button>
+          </div>
 
-          <details class="menu-editor">
-            <summary>카테고리별 세부 메뉴 수정하기</summary>
-            <div class="editor-body">
-              <label for="editor-category">수정할 카테고리</label>
-              <select id="editor-category">
-                <option value="korean">한식</option>
-                <option value="western">양식</option>
-                <option value="chinese">중식</option>
-                <option value="japanese">일식</option>
-                <option value="snack">분식·간단식</option>
-              </select>
-
-              <label for="menu-editor-input">세부 메뉴 목록</label>
-              <textarea id="menu-editor-input" rows="4"></textarea>
-              <p class="editor-hint">메뉴는 콤마로 구분해서 추가하거나 삭제할 수 있습니다.</p>
-              <button class="btn btn-outline compact-button" id="save-menu" type="button">세부 메뉴 저장</button>
-            </div>
-          </details>
+          <aside class="practice-result-card compact-result dinner-result-card" aria-live="polite">
+            <p class="hero-card-label">Today's Dinner</p>
+            <h2>추천 메뉴</h2>
+            <p class="random-choice" id="random-choice">?</p>
+            <p class="practice-result-desc" id="random-desc">카테고리를 선택한 뒤 버튼을 누르면 메뉴가 표시됩니다.</p>
+          </aside>
         </article>
 
-        <aside class="practice-result-card compact-result fade-in" aria-live="polite">
-          <p class="hero-card-label">Today's Dinner</p>
-          <h2>추천 결과</h2>
-          <p class="selected-category" id="selected-category">한식 카테고리</p>
-          <p class="random-choice" id="random-choice">?</p>
-          <p class="practice-result-desc" id="random-desc">카테고리를 선택한 뒤 버튼을 누르면 메뉴가 크게 표시됩니다.</p>
-        </aside>
+        <details class="menu-editor menu-editor-v2 fade-in">
+          <summary>카테고리별 세부 메뉴 수정하기</summary>
+          <div class="editor-body editor-body-v2">
+            <div class="menu-edit-grid">
+              <label>한식<textarea data-menu-key="korean" rows="3"></textarea></label>
+              <label>양식<textarea data-menu-key="western" rows="3"></textarea></label>
+              <label>중식<textarea data-menu-key="chinese" rows="3"></textarea></label>
+              <label>일식<textarea data-menu-key="japanese" rows="3"></textarea></label>
+              <label>분식·간단식<textarea data-menu-key="snack" rows="3"></textarea></label>
+            </div>
+            <p class="editor-hint">각 칸의 메뉴는 콤마로 구분합니다. 저장 후 해당 카테고리에서 바로 반영됩니다.</p>
+            <button class="btn btn-outline compact-button" id="save-menu" type="button">세부 메뉴 저장</button>
+          </div>
+        </details>
       </div>
     </section>
   </main>
@@ -125,9 +123,8 @@
       var choiceEl = document.getElementById('random-choice');
       var descEl = document.getElementById('random-desc');
       var selectedCategoryEl = document.getElementById('selected-category');
-      var editorCategory = document.getElementById('editor-category');
-      var editorInput = document.getElementById('menu-editor-input');
       var saveButton = document.getElementById('save-menu');
+      var editorInputs = document.querySelectorAll('[data-menu-key]');
 
       var currentCategory = 'korean';
       var categoryNames = {
@@ -155,8 +152,22 @@
         return menus[category] || [];
       }
 
-      function updateEditor() {
-        editorInput.value = getItems(editorCategory.value).join(', ');
+      function fillEditors() {
+        editorInputs.forEach(function (textarea) {
+          var key = textarea.getAttribute('data-menu-key');
+          textarea.value = menus[key].join(', ');
+        });
+      }
+
+      function saveEditors() {
+        editorInputs.forEach(function (textarea) {
+          var key = textarea.getAttribute('data-menu-key');
+          menus[key] = textarea.value
+            .split(',')
+            .map(function (item) { return item.trim(); })
+            .filter(function (item) { return item.length > 0; });
+        });
+        descEl.textContent = '카테고리별 세부 메뉴가 저장되었습니다.';
       }
 
       function setCategory(category) {
@@ -164,7 +175,7 @@
         categoryButtons.forEach(function (button) {
           button.classList.toggle('is-active', button.getAttribute('data-category') === category);
         });
-        selectedCategoryEl.textContent = categoryNames[category] + ' 카테고리';
+        selectedCategoryEl.textContent = categoryNames[category] + ' 카테고리 선택 중';
         choiceEl.textContent = '?';
         descEl.textContent = categoryNames[category] + ' 중에서 오늘 저녁 메뉴를 추천합니다.';
       }
@@ -179,7 +190,7 @@
         var items = getItems(currentCategory).filter(function (item) { return item.trim().length > 0; });
         if (items.length === 0) {
           choiceEl.textContent = '!';
-          descEl.textContent = '세부 메뉴 수정에서 후보를 하나 이상 입력해 주세요.';
+          descEl.textContent = '아래 세부 메뉴 수정 영역에서 후보를 하나 이상 입력해 주세요.';
           return;
         }
         var index = Math.floor(Math.random() * items.length);
@@ -188,17 +199,8 @@
         descEl.textContent = categoryNames[currentCategory] + ' 후보 중 오늘의 추천 메뉴입니다.';
       });
 
-      editorCategory.addEventListener('change', updateEditor);
-      saveButton.addEventListener('click', function () {
-        var key = editorCategory.value;
-        menus[key] = editorInput.value
-          .split(',')
-          .map(function (item) { return item.trim(); })
-          .filter(function (item) { return item.length > 0; });
-        descEl.textContent = categoryNames[key] + ' 세부 메뉴가 저장되었습니다.';
-      });
-
-      updateEditor();
+      saveButton.addEventListener('click', saveEditors);
+      fillEditors();
       setCategory(currentCategory);
     });
   </script>
