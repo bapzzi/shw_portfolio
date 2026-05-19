@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>D-Day 계산기 · 신해원 포트폴리오</title>
-  <meta name="description" content="Date 객체와 Math 객체를 활용한 프로젝트 마감 D-Day 계산기." />
+  <meta name="description" content="프로젝트별 마감 일정을 한 번에 계산하는 D-Day 계산기." />
   <link rel="stylesheet" as="style" crossorigin
         href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,89 +27,61 @@
       </nav>
     </div>
   </header>
+
   <main>
-    <section class="page-header">
+    <section class="compact-page-header">
       <div class="container">
-        <span class="section-eyebrow">// JavaScript Practice 01</span>
-        <h1 class="section-title">Project Deadline D-Day Calculator</h1>
-        <p class="section-desc">
-          Date 객체를 활용해 과제, 시험, 발표일 같은 목표 날짜까지 남은 기간을 계산합니다.
-        </p>
+        <span class="section-eyebrow">JavaScript Practice 01</span>
+        <h1 class="section-title">Project D-Day Board</h1>
+        <p class="section-desc">과제, 시험, 발표처럼 여러 목표 일정을 한 화면에서 관리하는 D-Day 계산기입니다.</p>
       </div>
     </section>
 
-    <section class="section">
-      <div class="container practice-layout">
-        <article class="practice-panel fade-in">
-          <div class="practice-panel-head">
-            <span class="practice-badge">Date + Math</span>
-            <h2>D-Day 계산하기</h2>
-            <p>목표 이름과 날짜를 입력하면 오늘 기준으로 D-Day 결과를 보여줍니다.</p>
+    <section class="compact-practice-section">
+      <div class="container dday-board-layout">
+        <article class="practice-panel compact-card fade-in">
+          <div class="practice-panel-head compact-head">
+            <span class="practice-badge">D-Day Manager</span>
+            <h2>일정 추가하기</h2>
+            <p>목표 이름과 날짜를 입력하면 아래 보드에 D-Day 카드가 추가됩니다.</p>
           </div>
 
-          <form class="practice-form" id="dday-form">
+          <form class="practice-form compact-form" id="dday-form">
             <div class="form-row">
               <label for="goal-name">목표 이름</label>
               <input id="goal-name" type="text" value="웹프로그래밍 포트폴리오 제출" required />
             </div>
-            <div class="form-row">
-              <label for="target-date">목표 날짜</label>
-              <input id="target-date" type="date" required />
+            <div class="form-row two-column-inputs">
+              <div>
+                <label for="target-date">목표 날짜</label>
+                <input id="target-date" type="date" required />
+              </div>
+              <div>
+                <label for="base-date">기준 날짜</label>
+                <input id="base-date" type="date" required />
+              </div>
             </div>
-            <div class="form-row">
-              <label for="base-date">기준 날짜</label>
-              <input id="base-date" type="date" required />
-            </div>
-            <button class="btn btn-primary" type="submit">D-Day 계산하기</button>
+            <button class="btn btn-primary compact-button" type="submit">D-Day 카드 추가</button>
           </form>
         </article>
 
-        <aside class="practice-result-card fade-in" aria-live="polite">
-          <p class="hero-card-label">// Result</p>
-          <h2 id="dday-title">목표 날짜를 입력해 주세요.</h2>
-          <p class="dday-number" id="dday-number">D-?</p>
-          <p class="practice-result-desc" id="dday-desc">
-            목표 날짜와 기준 날짜의 차이를 일 단위로 계산합니다.
-          </p>
-        </aside>
-      </div>
-    </section>
-
-    <section class="section section--alt">
-      <div class="container">
-        <header class="section-heading fade-in">
-          <span class="section-eyebrow">// Learning Point</span>
-          <h2 class="section-title">사용한 JavaScript 핵심 객체</h2>
-        </header>
-        <div class="concept-grid">
-          <article class="concept-card fade-in">
-            <h3>new Date()</h3>
-            <p>오늘 날짜와 목표 날짜를 Date 객체로 생성합니다.</p>
-          </article>
-          <article class="concept-card fade-in">
-            <h3>getTime()</h3>
-            <p>날짜를 밀리초 숫자로 바꿔 두 날짜의 차이를 계산합니다.</p>
-          </article>
-          <article class="concept-card fade-in">
-            <h3>Math.ceil()</h3>
-            <p>밀리초 차이를 일 단위로 변환한 뒤 올림 처리합니다.</p>
-          </article>
-          <article class="concept-card fade-in">
-            <h3>Math.abs()</h3>
-            <p>이미 지난 날짜는 절댓값으로 바꿔 D+ 형식으로 표시합니다.</p>
-          </article>
-        </div>
+        <article class="practice-panel compact-card fade-in">
+          <div class="practice-panel-head compact-head">
+            <span class="practice-badge">Saved Schedule</span>
+            <h2>프로젝트별 D-Day</h2>
+            <p>기본 예시와 직접 추가한 목표 일정이 함께 표시됩니다.</p>
+          </div>
+          <div class="dday-list" id="dday-list" aria-live="polite"></div>
+        </article>
       </div>
     </section>
   </main>
+
   <footer class="site-footer">
     <div class="container footer-inner">
       <div class="footer-brand">
         <p class="footer-brand-name">신해원 · Shin Haewon</p>
-        <p class="footer-brand-desc">
-          광운대학교 경영학부 / 예비 ERP 개발자.
-          비즈니스의 흐름을 코드로 옮기는 일에 관심이 있습니다.
-        </p>
+        <p class="footer-brand-desc">광운대학교 경영학부 / 예비 ERP 개발자.</p>
       </div>
       <div class="footer-col">
         <h4>Pages</h4>
@@ -123,8 +95,8 @@
       <div class="footer-col">
         <h4>Practice</h4>
         <ul>
-          <li><a href="dday.html">D-Day Calculator</a></li>
-          <li><a href="random.html">Dinner Random Picker</a></li>
+          <li><a href="dday.html">D-Day Board</a></li>
+          <li><a href="random.html">Dinner Picker</a></li>
         </ul>
       </div>
     </div>
@@ -133,6 +105,7 @@
       <small>Built with HTML · CSS · JavaScript</small>
     </div>
   </footer>
+
   <script src="script.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -140,57 +113,97 @@
       var goalInput = document.getElementById('goal-name');
       var targetInput = document.getElementById('target-date');
       var baseInput = document.getElementById('base-date');
-      var titleEl = document.getElementById('dday-title');
-      var numberEl = document.getElementById('dday-number');
-      var descEl = document.getElementById('dday-desc');
+      var listEl = document.getElementById('dday-list');
+
+      var schedules = [
+        { name: '웹프로그래밍 포트폴리오 제출', date: '2026-06-25' },
+        { name: '인터넷활용 기말 정리', date: '2026-06-18' },
+        { name: 'ERP 팀 프로젝트 발표', date: '2026-06-12' }
+      ];
+
+      function toInputDate(date) {
+        var year = date.getFullYear();
+        var month = String(date.getMonth() + 1).padStart(2, '0');
+        var day = String(date.getDate()).padStart(2, '0');
+        return year + '-' + month + '-' + day;
+      }
 
       function formatDate(date) {
-        return date.toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' });
+        return date.toLocaleDateString('ko-KR', { month: 'long', day: 'numeric', weekday: 'short' });
+      }
+
+      function getDiffDay(targetValue, baseValue) {
+        var targetDate = new Date(targetValue + 'T00:00:00');
+        var baseDate = new Date(baseValue + 'T00:00:00');
+        var diffMs = targetDate.getTime() - baseDate.getTime();
+        return Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+      }
+
+      function getDdayText(diffDay) {
+        if (diffDay === 0) return 'D-Day';
+        if (diffDay > 0) return 'D-' + diffDay;
+        return 'D+' + Math.abs(diffDay);
+      }
+
+      function getStatusText(diffDay) {
+        if (diffDay === 0) return '오늘 마감';
+        if (diffDay > 0) return diffDay + '일 남음';
+        return Math.abs(diffDay) + '일 지남';
+      }
+
+      function renderList() {
+        var baseValue = baseInput.value;
+        var sorted = schedules.slice().sort(function (a, b) {
+          return getDiffDay(a.date, baseValue) - getDiffDay(b.date, baseValue);
+        });
+
+        listEl.innerHTML = '';
+
+        sorted.forEach(function (item, index) {
+          var targetDate = new Date(item.date + 'T00:00:00');
+          var diffDay = getDiffDay(item.date, baseValue);
+          var card = document.createElement('div');
+          card.className = 'dday-mini-card';
+          if (diffDay < 0) card.classList.add('is-past');
+          if (diffDay === 0) card.classList.add('is-today');
+
+          card.innerHTML =
+            '<div>' +
+              '<p class="dday-card-label">' + formatDate(targetDate) + '</p>' +
+              '<h3>' + item.name + '</h3>' +
+              '<p class="dday-card-desc">' + getStatusText(diffDay) + '</p>' +
+            '</div>' +
+            '<strong>' + getDdayText(diffDay) + '</strong>' +
+            '<button type="button" aria-label="일정 삭제">×</button>';
+
+          card.querySelector('button').addEventListener('click', function () {
+            schedules.splice(index, 1);
+            renderList();
+          });
+
+          listEl.appendChild(card);
+        });
       }
 
       function setDefaultDates() {
         var today = new Date();
-        var target = new Date();
-        target.setDate(today.getDate() + 14);
-        baseInput.valueAsDate = today;
-        targetInput.valueAsDate = target;
+        targetInput.value = '2026-06-25';
+        baseInput.value = toInputDate(today);
       }
 
-      function calculateDday(event) {
-        if (event) event.preventDefault();
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        schedules.push({
+          name: goalInput.value.trim() || '새 목표',
+          date: targetInput.value
+        });
+        goalInput.value = '';
+        renderList();
+      });
 
-        var goal = goalInput.value.trim() || '목표';
-        var baseDate = new Date(baseInput.value);
-        var targetDate = new Date(targetInput.value);
-
-        if (isNaN(baseDate.getTime()) || isNaN(targetDate.getTime())) {
-          titleEl.textContent = '날짜를 다시 확인해 주세요.';
-          numberEl.textContent = '!';
-          descEl.textContent = '목표 날짜와 기준 날짜를 모두 입력해야 계산할 수 있습니다.';
-          return;
-        }
-
-        var diffMs = targetDate.getTime() - baseDate.getTime();
-        var diffDay = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
-
-        titleEl.textContent = goal;
-        if (diffDay === 0) {
-          numberEl.textContent = 'D-Day';
-          descEl.textContent = '오늘은 ' + goal + ' 당일입니다.';
-        } else if (diffDay > 0) {
-          numberEl.textContent = 'D-' + diffDay;
-          descEl.textContent = formatDate(targetDate) + '까지 ' + diffDay + '일 남았습니다.';
-        } else {
-          numberEl.textContent = 'D+' + Math.abs(diffDay);
-          descEl.textContent = formatDate(targetDate) + '에서 ' + Math.abs(diffDay) + '일 지났습니다.';
-        }
-      }
-
+      baseInput.addEventListener('change', renderList);
       setDefaultDates();
-      calculateDday();
-      form.addEventListener('submit', calculateDday);
-      targetInput.addEventListener('change', calculateDday);
-      baseInput.addEventListener('change', calculateDday);
+      renderList();
     });
   </script>
 </body>

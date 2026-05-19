@@ -1418,3 +1418,303 @@ textarea {
         grid-template-columns: 1fr;
     }
 }
+
+/* ===== 19. 실습 페이지 레이아웃 재정리 ================================= */
+.compact-page-header {
+    padding: 56px 0 34px;
+    border-bottom: 1px solid var(--border-soft);
+    background: linear-gradient(180deg, rgba(79, 70, 229, 0.055), transparent 70%);
+}
+
+.compact-page-header .section-title {
+    margin-top: 8px;
+    margin-bottom: 10px;
+    font-size: clamp(2.2rem, 5vw, 4rem);
+}
+
+.compact-page-header .section-desc {
+    max-width: 680px;
+}
+
+.compact-practice-section {
+    padding: 42px 0 72px;
+}
+
+.compact-card {
+    padding: 26px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    box-shadow: var(--shadow);
+}
+
+.compact-head {
+    margin-bottom: 22px;
+}
+
+.compact-head h2 {
+    margin-bottom: 6px;
+    font-size: clamp(1.35rem, 2.4vw, 1.8rem);
+}
+
+.compact-head p {
+    font-size: 0.98rem;
+    line-height: 1.65;
+}
+
+.compact-form {
+    gap: 14px;
+}
+
+.two-column-inputs {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.two-column-inputs > div {
+    display: grid;
+    gap: 8px;
+}
+
+.compact-button {
+    min-height: 48px;
+    padding: 12px 18px;
+}
+
+.wide-button {
+    width: 100%;
+    margin-top: 18px;
+}
+
+.dday-board-layout,
+.dinner-layout {
+    display: grid;
+    grid-template-columns: minmax(320px, 0.82fr) minmax(0, 1.18fr);
+    gap: 24px;
+    align-items: start;
+}
+
+.dday-list {
+    display: grid;
+    gap: 12px;
+}
+
+.dday-mini-card {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    align-items: center;
+    gap: 16px;
+    min-height: 104px;
+    padding: 18px 18px 18px 20px;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    background: linear-gradient(135deg, var(--accent-soft), transparent 48%), var(--bg);
+}
+
+.dday-mini-card h3 {
+    margin: 3px 0 2px;
+    font-size: clamp(1.08rem, 2vw, 1.28rem);
+    letter-spacing: -0.035em;
+}
+
+.dday-card-label {
+    color: var(--accent);
+    font-size: 0.82rem;
+    font-weight: 800;
+}
+
+.dday-card-desc {
+    color: var(--text-soft);
+    font-size: 0.92rem;
+}
+
+.dday-mini-card strong {
+    min-width: 96px;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: clamp(1.8rem, 5vw, 2.65rem);
+    line-height: 1;
+    text-align: right;
+    letter-spacing: -0.08em;
+}
+
+.dday-mini-card button {
+    display: inline-grid;
+    width: 30px;
+    height: 30px;
+    place-items: center;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: background var(--t-base), color var(--t-base), border-color var(--t-base);
+}
+
+.dday-mini-card button:hover {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    color: var(--accent);
+}
+
+.dday-mini-card.is-past {
+    opacity: 0.78;
+    background: var(--surface);
+}
+
+.dday-mini-card.is-past strong {
+    color: var(--text-muted);
+}
+
+.dday-mini-card.is-today {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.category-card {
+    min-height: 86px;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 1.05rem;
+    font-weight: 850;
+    letter-spacing: -0.03em;
+    cursor: pointer;
+    transition: transform var(--t-base), border-color var(--t-base), background var(--t-base), color var(--t-base), box-shadow var(--t-base);
+}
+
+.category-card:hover,
+.category-card:focus-visible {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+    box-shadow: var(--shadow-sm);
+}
+
+.category-card.is-active {
+    border-color: var(--accent);
+    background: var(--accent);
+    color: #fff;
+    box-shadow: 0 12px 30px rgba(79, 70, 229, 0.18);
+}
+
+.compact-result {
+    position: sticky;
+    top: 92px;
+    min-height: 380px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 34px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: radial-gradient(circle at top right, var(--accent-soft), transparent 38%), var(--surface);
+    box-shadow: var(--shadow);
+}
+
+.selected-category {
+    display: inline-flex;
+    align-self: flex-start;
+    margin-top: 8px;
+    padding: 7px 12px;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-size: 0.9rem;
+    font-weight: 800;
+}
+
+.menu-editor {
+    margin-top: 18px;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    background: var(--bg);
+    overflow: hidden;
+}
+
+.menu-editor summary {
+    padding: 15px 17px;
+    color: var(--text);
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.editor-body {
+    display: grid;
+    gap: 10px;
+    padding: 0 17px 17px;
+}
+
+.editor-body label {
+    margin-top: 4px;
+    font-size: 0.92rem;
+    font-weight: 800;
+}
+
+.editor-body select,
+.editor-body textarea {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    padding: 12px 13px;
+    outline: none;
+}
+
+.editor-body select:focus,
+.editor-body textarea:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
+.editor-hint {
+    color: var(--text-muted);
+    font-size: 0.88rem;
+}
+
+@media (max-width: 900px) {
+    .dday-board-layout,
+    .dinner-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .compact-result {
+        position: static;
+        min-height: 300px;
+    }
+}
+
+@media (max-width: 640px) {
+    .compact-page-header {
+        padding: 42px 0 28px;
+    }
+
+    .compact-practice-section {
+        padding: 28px 0 54px;
+    }
+
+    .compact-card,
+    .compact-result {
+        padding: 22px;
+    }
+
+    .two-column-inputs,
+    .category-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dday-mini-card {
+        grid-template-columns: 1fr auto;
+    }
+
+    .dday-mini-card button {
+        grid-column: 2;
+    }
+}
