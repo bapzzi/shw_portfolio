@@ -253,7 +253,6 @@ document.addEventListener('DOMContentLoaded', function () {
     var searchInput = document.getElementById('project-search');
     var sortSelect = document.getElementById('project-sort');
     var categoryButtons = document.querySelectorAll('[data-category-filter]');
-    var resultText = document.getElementById('portfolio-result-text');
     var emptyText = document.getElementById('portfolio-empty');
     var currentCategory = 'all';
 
@@ -270,15 +269,19 @@ document.addEventListener('DOMContentLoaded', function () {
         ].join(' '));
     }
 
+    function dateDistance(card) {
+        var value = card.dataset.date || '2099-12';
+        var parts = value.split('-');
+        var date = new Date(Number(parts[0]), Number(parts[1] || 1) - 1, 1);
+        return Math.abs(date.getTime() - Date.now());
+    }
+
     function sortCards(mode) {
         var sorted = cards.slice().sort(function (a, b) {
-            if (mode === 'date') {
-                return (b.dataset.date || '').localeCompare(a.dataset.date || '');
-            }
-
-            var categoryCompare = (a.dataset.category || '').localeCompare(b.dataset.category || '', 'ko');
-            if (categoryCompare !== 0) return categoryCompare;
-            return (b.dataset.date || '').localeCompare(a.dataset.date || '');
+            var diff = dateDistance(a) - dateDistance(b);
+            if (mode === 'far') diff = diff * -1;
+            if (diff !== 0) return diff;
+            return (a.dataset.title || '').localeCompare(b.dataset.title || '', 'ko');
         });
 
         sorted.forEach(function (card) {
@@ -290,7 +293,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var query = normalize(searchInput ? searchInput.value : '');
         var visibleCount = 0;
 
-        sortCards(sortSelect ? sortSelect.value : 'category');
+        sortCards(sortSelect ? sortSelect.value : 'near');
 
         cards.forEach(function (card) {
             var categoryMatch = currentCategory === 'all' || card.dataset.category === currentCategory;
@@ -301,11 +304,6 @@ document.addEventListener('DOMContentLoaded', function () {
             if (isVisible) visibleCount++;
         });
 
-        if (resultText) {
-            var categoryLabel = currentCategory === 'all' ? '전체' : currentCategory;
-            var searchLabel = query ? ' · 검색어: ' + query : '';
-            resultText.textContent = categoryLabel + ' 기준으로 ' + visibleCount + '개 프로젝트를 표시합니다.' + searchLabel;
-        }
 
         if (emptyText) {
             emptyText.hidden = visibleCount !== 0;

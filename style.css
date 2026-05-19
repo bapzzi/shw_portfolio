@@ -2377,3 +2377,165 @@ textarea {
         flex: none;
     }
 }
+
+/* ===== Portfolio toolbar refinement ============================ */
+.portfolio-section {
+    padding-top: 44px !important;
+}
+
+.portfolio-toolbar {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    align-items: center !important;
+    gap: 18px !important;
+    margin: 0 0 34px !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+}
+
+.portfolio-filter-group {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    flex-wrap: wrap !important;
+}
+
+.portfolio-control-group {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 10px !important;
+    flex-wrap: nowrap !important;
+}
+
+.portfolio-chip {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-height: 40px !important;
+    padding: 0 17px !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 999px !important;
+    background: var(--surface) !important;
+    color: var(--text-soft) !important;
+    font-family: var(--font-sans) !important;
+    font-size: 0.92rem !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.025em !important;
+    line-height: 1 !important;
+    box-shadow: var(--shadow-sm) !important;
+    cursor: pointer !important;
+}
+
+.portfolio-chip:hover {
+    transform: translateY(-1px) !important;
+    border-color: var(--accent) !important;
+    color: var(--accent) !important;
+}
+
+.portfolio-chip.is-active {
+    background: var(--accent) !important;
+    border-color: var(--accent) !important;
+    color: #fff !important;
+    box-shadow: 0 12px 28px rgba(79, 70, 229, 0.2) !important;
+}
+
+.portfolio-search-wrap {
+    position: relative !important;
+    width: 260px !important;
+}
+
+.portfolio-search-icon {
+    position: absolute !important;
+    left: 14px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    color: var(--text-muted) !important;
+    font-family: var(--font-mono) !important;
+    font-size: 1rem !important;
+    pointer-events: none !important;
+}
+
+.portfolio-search,
+.portfolio-sort {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    min-height: 42px !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 999px !important;
+    background-color: var(--surface) !important;
+    color: var(--text) !important;
+    font-family: var(--font-sans) !important;
+    font-size: 0.92rem !important;
+    font-weight: 600 !important;
+    outline: none !important;
+    box-shadow: var(--shadow-sm) !important;
+}
+
+.portfolio-search {
+    width: 100% !important;
+    padding: 0 16px 0 38px !important;
+}
+
+.portfolio-sort {
+    width: 170px !important;
+    padding: 0 38px 0 16px !important;
+    cursor: pointer !important;
+    background-image: linear-gradient(45deg, transparent 50%, var(--text-muted) 50%), linear-gradient(135deg, var(--text-muted) 50%, transparent 50%) !important;
+    background-position: calc(100% - 18px) 18px, calc(100% - 13px) 18px !important;
+    background-size: 5px 5px, 5px 5px !important;
+    background-repeat: no-repeat !important;
+}
+
+.portfolio-search:focus,
+.portfolio-sort:focus {
+    border-color: var(--accent) !important;
+    box-shadow: 0 0 0 4px var(--accent-soft) !important;
+}
+
+.portfolio-result-text {
+    display: none !important;
+}
+
+@media (max-width: 920px) {
+    .portfolio-toolbar {
+        grid-template-columns: 1fr !important;
+        gap: 14px !important;
+    }
+
+    .portfolio-control-group {
+        justify-content: flex-start !important;
+        flex-wrap: wrap !important;
+    }
+
+    .portfolio-search-wrap {
+        width: min(100%, 360px) !important;
+    }
+}
+
+@media (max-width: 560px) {
+    .portfolio-section {
+        padding-top: 32px !important;
+    }
+
+    .portfolio-filter-group {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        width: 100% !important;
+    }
+
+    .portfolio-chip {
+        width: 100% !important;
+    }
+
+    .portfolio-control-group,
+    .portfolio-search-wrap,
+    .portfolio-sort {
+        width: 100% !important;
+    }
+}

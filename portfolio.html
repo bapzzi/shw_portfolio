@@ -63,7 +63,7 @@
     <!-- ====================================================
          프로젝트 카드 그리드
          ==================================================== -->
-    <section class="section" aria-labelledby="projects-title">
+    <section class="section portfolio-section" aria-labelledby="projects-title">
       <div class="container">
 
         <h2 class="visually-hidden" id="projects-title" style="position:absolute;left:-9999px;">
@@ -80,16 +80,17 @@
           </div>
           <div class="portfolio-control-group">
             <label class="portfolio-search-label" for="project-search">프로젝트 검색</label>
-            <input id="project-search" class="portfolio-search" type="search" placeholder="프로젝트명, 기술, 설명 검색" autocomplete="off">
+            <div class="portfolio-search-wrap">
+              <span class="portfolio-search-icon" aria-hidden="true">⌕</span>
+              <input id="project-search" class="portfolio-search" type="search" placeholder="검색어 입력" autocomplete="off">
+            </div>
             <label class="portfolio-sort-label" for="project-sort">정렬 기준</label>
             <select id="project-sort" class="portfolio-sort">
-              <option value="category">카테고리별</option>
-              <option value="date">날짜별</option>
+              <option value="near">가장 가까운 날짜</option>
+              <option value="far">먼 날짜</option>
             </select>
           </div>
         </div>
-
-        <p class="portfolio-result-text" id="portfolio-result-text">전체 프로젝트를 표시하고 있습니다.</p>
 
         <div class="project-grid" id="project-grid">
 
