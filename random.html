@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>저녁 메뉴 랜덤 뽑기 · 신해원 포트폴리오</title>
+  <meta name="description" content="String, Array, Math 객체를 활용한 저녁 메뉴 랜덤 뽑기." />
+  <link rel="stylesheet" as="style" crossorigin
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand" aria-label="홈으로">
+        <span class="brand-mark">SHW</span>
+        <span class="brand-suffix">/portfolio</span>
+      </a>
+      <nav class="primary-nav" aria-label="주 메뉴">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="page-header">
+      <div class="container">
+        <span class="section-eyebrow">// JavaScript Practice 02</span>
+        <h1 class="section-title">Dinner Menu Random Picker</h1>
+        <p class="section-desc">
+          저녁 메뉴 후보를 콤마로 입력하면 String, Array, Math 객체를 활용해 하나를 추천합니다.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container practice-layout">
+        <article class="practice-panel fade-in">
+          <div class="practice-panel-head">
+            <span class="practice-badge">String + Array + Math</span>
+            <h2>오늘 저녁 메뉴 뽑기</h2>
+            <p>먹고 싶은 메뉴를 콤마로 구분해 입력한 뒤 버튼을 눌러 보세요.</p>
+          </div>
+
+          <div class="preset-row" aria-label="메뉴 프리셋">
+            <button type="button" class="preset-btn" data-preset="korean">한식</button>
+            <button type="button" class="preset-btn" data-preset="quick">간단식</button>
+            <button type="button" class="preset-btn" data-preset="mixed">랜덤 믹스</button>
+          </div>
+
+          <form class="practice-form" id="random-form">
+            <div class="form-row">
+              <label for="menu-list">저녁 메뉴 후보</label>
+              <textarea id="menu-list" rows="5" required>김치찌개, 제육볶음, 돈까스, 마라탕, 초밥, 파스타, 햄버거, 순대국, 떡볶이, 샐러드</textarea>
+            </div>
+            <button class="btn btn-primary" type="submit">오늘 저녁 뽑기</button>
+            <button class="btn btn-outline" id="clear-history" type="button">기록 지우기</button>
+          </form>
+        </article>
+
+        <aside class="practice-result-card fade-in" aria-live="polite">
+          <p class="hero-card-label">// Today's Dinner</p>
+          <h2>추천 메뉴</h2>
+          <p class="random-choice" id="random-choice">?</p>
+          <p class="practice-result-desc" id="random-desc">
+            후보를 입력하고 버튼을 누르면 저녁 메뉴가 뽑힙니다.
+          </p>
+          <div class="history-box">
+            <h3>최근 뽑기 기록</h3>
+            <ol id="pick-history"></ol>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section section--alt">
+      <div class="container">
+        <header class="section-heading fade-in">
+          <span class="section-eyebrow">// Learning Point</span>
+          <h2 class="section-title">사용한 JavaScript 핵심 객체</h2>
+        </header>
+        <div class="concept-grid">
+          <article class="concept-card fade-in">
+            <h3>String.split()</h3>
+            <p>콤마로 입력한 문자열을 메뉴 배열로 변환합니다.</p>
+          </article>
+          <article class="concept-card fade-in">
+            <h3>Array.length</h3>
+            <p>배열에 들어 있는 메뉴 개수를 확인합니다.</p>
+          </article>
+          <article class="concept-card fade-in">
+            <h3>Math.random()</h3>
+            <p>0 이상 1 미만의 난수를 만들어 랜덤 선택에 활용합니다.</p>
+          </article>
+          <article class="concept-card fade-in">
+            <h3>String.trim()</h3>
+            <p>메뉴 앞뒤의 불필요한 공백을 제거합니다.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <p class="footer-brand-name">신해원 · Shin Haewon</p>
+        <p class="footer-brand-desc">
+          광운대학교 경영학부 / 예비 ERP 개발자.
+          비즈니스의 흐름을 코드로 옮기는 일에 관심이 있습니다.
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>Pages</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Practice</h4>
+        <ul>
+          <li><a href="dday.html">D-Day Calculator</a></li>
+          <li><a href="random.html">Dinner Random Picker</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <small>© <span id="year"></span> Shin Haewon. All rights reserved.</small>
+      <small>Built with HTML · CSS · JavaScript</small>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var form = document.getElementById('random-form');
+      var menuInput = document.getElementById('menu-list');
+      var choiceEl = document.getElementById('random-choice');
+      var descEl = document.getElementById('random-desc');
+      var historyEl = document.getElementById('pick-history');
+      var clearBtn = document.getElementById('clear-history');
+      var presetButtons = document.querySelectorAll('.preset-btn');
+
+      var presets = {
+        korean: '김치찌개, 된장찌개, 제육볶음, 순대국, 비빔밥, 갈비탕, 부대찌개, 칼국수',
+        quick: '햄버거, 샌드위치, 김밥, 라면, 떡볶이, 샐러드, 토스트, 우동',
+        mixed: '초밥, 파스타, 마라탕, 돈까스, 쌀국수, 카레, 타코, 피자, 찜닭'
+      };
+
+      function getMenuItems() {
+        return menuInput.value
+          .split(',')
+          .map(function (item) { return item.trim(); })
+          .filter(function (item) { return item.length > 0; });
+      }
+
+      function drawMenu(event) {
+        event.preventDefault();
+
+        var items = getMenuItems();
+        if (items.length === 0) {
+          choiceEl.textContent = '!';
+          descEl.textContent = '메뉴 후보를 하나 이상 입력해 주세요.';
+          return;
+        }
+
+        var index = Math.floor(Math.random() * items.length);
+        var choice = items[index];
+
+        choiceEl.textContent = choice;
+        descEl.textContent = '총 ' + items.length + '개의 후보 중에서 ' + choice + ' 메뉴가 선택되었습니다.';
+
+        var li = document.createElement('li');
+        li.textContent = choice;
+        historyEl.prepend(li);
+
+        while (historyEl.children.length > 5) {
+          historyEl.removeChild(historyEl.lastElementChild);
+        }
+      }
+
+      presetButtons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var key = btn.getAttribute('data-preset');
+          menuInput.value = presets[key];
+          choiceEl.textContent = '?';
+          descEl.textContent = btn.textContent + ' 프리셋을 불러왔습니다. 오늘 저녁을 뽑아 보세요.';
+        });
+      });
+
+      clearBtn.addEventListener('click', function () {
+        historyEl.innerHTML = '';
+        choiceEl.textContent = '?';
+        descEl.textContent = '기록을 지웠습니다. 다시 뽑아 보세요.';
+      });
+
+      form.addEventListener('submit', drawMenu);
+    });
+  </script>
+</body>
+</html>

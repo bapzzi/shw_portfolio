@@ -14,7 +14,9 @@
 shw_portfolio/
 ├── index.html         # 홈 (히어로 + 핵심 스킬 미리보기)
 ├── about.html         # 소개 (자기소개 + 학력 타임라인 + 관심분야)
-├── portfolio.html     # 프로젝트 카드 그리드
+├── portfolio.html     # 프로젝트 카드 그리드 + JavaScript 실습 연결
+├── dday.html          # Date 객체 기반 D-Day 계산기
+├── random.html        # String/Array/Math 기반 저녁 메뉴 랜덤 뽑기
 ├── contact.html       # 연락처 카드 + 메시지 폼
 ├── style.css          # 모든 페이지가 공유하는 스타일시트
 ├── script.js          # 모든 페이지가 공유하는 자바스크립트
@@ -23,6 +25,36 @@ shw_portfolio/
 
 총 4개의 HTML 페이지가 단일 `style.css` 와 `script.js` 를 공유하는 구조이며,
 이는 인터넷활용 수업의 **HTML / CSS / JavaScript 분리 원칙**을 따릅니다.
+
+---
+
+## 🧪 11주차 JavaScript 코어 객체 실습 반영
+
+인터넷활용 11주차 실습 요구사항을 포트폴리오 내부 기능으로 확장했습니다.
+
+### D-Day 계산기
+
+`dday.html`은 `Date` 객체를 활용해 목표 날짜와 기준 날짜의 차이를 계산합니다.  
+사용자는 과제, 시험, 발표일 같은 목표 이름과 날짜를 입력할 수 있으며, 결과는 `D-`, `D-Day`, `D+` 형식으로 표시됩니다.
+
+사용한 핵심 개념은 다음과 같습니다.
+
+- `new Date()`로 날짜 객체 생성
+- `Date.getTime()`으로 날짜를 밀리초 단위 숫자로 변환
+- `Math.ceil()`로 남은 일수 올림 처리
+- `Math.abs()`로 지난 날짜의 절댓값 처리
+
+### 저녁 메뉴 랜덤 뽑기
+
+`random.html`은 콤마로 입력한 저녁 메뉴 후보를 배열로 변환한 뒤, 무작위로 하나를 추천합니다.  
+한식, 간단식, 랜덤 믹스 프리셋과 최근 뽑기 기록 기능을 추가해 단순 실습 예제보다 실제 웹 기능처럼 보이도록 구성했습니다.
+
+사용한 핵심 개념은 다음과 같습니다.
+
+- `String.split(',')`으로 문자열을 배열로 변환
+- `String.trim()`으로 공백 제거
+- `Array.length`로 후보 개수 확인
+- `Math.random()`과 `Math.floor()`로 랜덤 인덱스 생성
 
 ---
 
