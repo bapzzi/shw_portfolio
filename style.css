@@ -2539,3 +2539,67 @@ textarea {
         width: 100% !important;
     }
 }
+
+
+/* ===== Portfolio category color system ======================== */
+.project-card[data-category="웹프로그래밍"] {
+    --category-main: #6d5dfc;
+    --category-sub: #a78bfa;
+    --category-soft: rgba(109, 93, 252, 0.10);
+}
+
+.project-card[data-category="ERP"] {
+    --category-main: #f97316;
+    --category-sub: #f59e0b;
+    --category-soft: rgba(249, 115, 22, 0.11);
+}
+
+.project-card[data-category="바이브코딩"] {
+    --category-main: #0ea5e9;
+    --category-sub: #2563eb;
+    --category-soft: rgba(14, 165, 233, 0.11);
+}
+
+.project-card[data-category] {
+    border-top: 4px solid var(--category-main);
+}
+
+.project-card[data-category]:hover {
+    border-color: var(--category-main);
+}
+
+.project-card[data-category] .project-cover {
+    background: linear-gradient(135deg, var(--category-main) 0%, var(--category-sub) 100%) !important;
+}
+
+.project-card[data-category] .project-meta {
+    color: var(--category-main);
+    font-weight: 700;
+}
+
+.project-card[data-category] .project-link {
+    color: var(--category-main);
+}
+
+.project-card[data-category] .stack-tag {
+    background: var(--category-soft);
+    border-color: color-mix(in srgb, var(--category-main) 22%, var(--border));
+}
+
+.portfolio-chip[data-category-filter="웹프로그래밍"].is-active {
+    background: #6d5dfc !important;
+    border-color: #6d5dfc !important;
+    box-shadow: 0 12px 28px rgba(109, 93, 252, 0.20) !important;
+}
+
+.portfolio-chip[data-category-filter="ERP"].is-active {
+    background: #f97316 !important;
+    border-color: #f97316 !important;
+    box-shadow: 0 12px 28px rgba(249, 115, 22, 0.20) !important;
+}
+
+.portfolio-chip[data-category-filter="바이브코딩"].is-active {
+    background: #0ea5e9 !important;
+    border-color: #0ea5e9 !important;
+    box-shadow: 0 12px 28px rgba(14, 165, 233, 0.20) !important;
+}

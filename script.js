@@ -269,17 +269,16 @@ document.addEventListener('DOMContentLoaded', function () {
         ].join(' '));
     }
 
-    function dateDistance(card) {
-        var value = card.dataset.date || '2099-12';
+    function dateValue(card) {
+        var value = card.dataset.date || '1900-01';
         var parts = value.split('-');
-        var date = new Date(Number(parts[0]), Number(parts[1] || 1) - 1, 1);
-        return Math.abs(date.getTime() - Date.now());
+        return new Date(Number(parts[0]), Number(parts[1] || 1) - 1, 1).getTime();
     }
 
     function sortCards(mode) {
         var sorted = cards.slice().sort(function (a, b) {
-            var diff = dateDistance(a) - dateDistance(b);
-            if (mode === 'far') diff = diff * -1;
+            var diff = dateValue(b) - dateValue(a);
+            if (mode === 'oldest') diff = diff * -1;
             if (diff !== 0) return diff;
             return (a.dataset.title || '').localeCompare(b.dataset.title || '', 'ko');
         });
@@ -293,7 +292,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var query = normalize(searchInput ? searchInput.value : '');
         var visibleCount = 0;
 
-        sortCards(sortSelect ? sortSelect.value : 'near');
+        sortCards(sortSelect ? sortSelect.value : 'latest');
 
         cards.forEach(function (card) {
             var categoryMatch = currentCategory === 'all' || card.dataset.category === currentCategory;
