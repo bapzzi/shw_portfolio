@@ -2845,3 +2845,48 @@ textarea {
         grid-template-columns: 1fr;
     }
 }
+
+/* ===== 24. D-Day 데스크톱 전체화면 입력 카드 보정 ===================== */
+/* 전체화면에서만 입력 카드의 날짜 필드가 좁아지는 문제를 보정합니다. */
+@media (min-width: 1200px) {
+    .compact-practice-section .dday-board-layout-v2 {
+        max-width: 1240px !important;
+        grid-template-columns: 430px minmax(0, 740px) !important;
+        gap: 28px !important;
+        align-items: start !important;
+        justify-content: center !important;
+    }
+
+    .dday-board-layout-v2 .compact-card:first-child {
+        width: 100% !important;
+        max-width: 430px !important;
+    }
+
+    .dday-board-layout-v2 .two-column-inputs {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+        gap: 12px !important;
+    }
+
+    .dday-board-layout-v2 .two-column-inputs > div,
+    .dday-board-layout-v2 .practice-form input[type="date"] {
+        min-width: 0 !important;
+    }
+
+    .dday-board-layout-v2 .practice-form input[type="date"] {
+        width: 100% !important;
+        padding-left: 16px !important;
+        padding-right: 12px !important;
+        letter-spacing: -0.02em !important;
+    }
+}
+
+@media (min-width: 1500px) {
+    .compact-practice-section .dday-board-layout-v2 {
+        max-width: 1280px !important;
+        grid-template-columns: 440px minmax(0, 760px) !important;
+    }
+
+    .dday-board-layout-v2 .compact-card:first-child {
+        max-width: 440px !important;
+    }
+}
