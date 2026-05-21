@@ -120,12 +120,43 @@
       var countEl = document.getElementById('dday-count');
       var messageEl = document.getElementById('dday-message');
 
-      var schedules = [
+      /* ── localStorage 저장/로드 ─────────────────────────────────
+       * 'dday-schedules' 키로 브라우저에 영구 저장합니다.
+       * 같은 브라우저/기기에서만 유지되며, 시크릿(사생활보호) 모드에선
+       * 창을 닫는 순간 데이터가 사라집니다. */
+      var STORAGE_KEY = 'dday-schedules';
+      var DEFAULT_SCHEDULES = [
         { id: 1, name: '웹프로그래밍 포트폴리오 제출', date: '2026-06-25' },
         { id: 2, name: '인터넷활용 기말 정리', date: '2026-06-18' },
         { id: 3, name: 'ERP 팀 프로젝트 발표', date: '2026-06-12' }
       ];
-      var nextId = 4;
+
+      function loadSchedules() {
+        try {
+          var raw = localStorage.getItem(STORAGE_KEY);
+          if (raw === null) return DEFAULT_SCHEDULES.slice(); // 첫 방문이면 기본값
+          var parsed = JSON.parse(raw);
+          if (!Array.isArray(parsed)) return DEFAULT_SCHEDULES.slice();
+          return parsed;
+        } catch (err) {
+          // JSON 파싱 실패 등 — 기본값으로 폴백
+          return DEFAULT_SCHEDULES.slice();
+        }
+      }
+
+      function saveSchedules() {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(schedules));
+        } catch (err) {
+          // 용량 초과(QuotaExceededError) 등은 무시
+        }
+      }
+
+      var schedules = loadSchedules();
+      // 다음에 부여할 id = 기존 id 중 최댓값 + 1 (빈 배열이면 1)
+      var nextId = schedules.reduce(function (max, item) {
+        return Math.max(max, Number(item.id) || 0);
+      }, 0) + 1;
 
       function toInputDate(date) {
         var year = date.getFullYear();
@@ -219,6 +250,7 @@
           showMessage('새 D-Day가 추가되었습니다.');
         }
 
+        saveSchedules();
         goalInput.value = '';
         renderList();
       });
@@ -229,6 +261,7 @@
         schedules = schedules.filter(function (item) {
           return item.id !== id;
         });
+        saveSchedules();
         renderList();
       });
 
