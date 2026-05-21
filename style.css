@@ -2847,24 +2847,34 @@ textarea {
 }
 
 /* ===== 24. D-Day 데스크톱 전체화면 입력 카드 보정 ===================== */
-/* 전체화면에서만 입력 카드의 날짜 필드가 좁아지는 문제를 보정합니다. */
+/* 전체화면에서 입력 카드의 가로폭이 좁아 내부 폼이 답답해 보이는 문제를 보정합니다. */
 @media (min-width: 1200px) {
     .compact-practice-section .dday-board-layout-v2 {
-        max-width: 1240px !important;
-        grid-template-columns: 430px minmax(0, 740px) !important;
-        gap: 28px !important;
+        max-width: 1280px !important;
+        grid-template-columns: 480px minmax(0, 1fr) !important;
+        gap: 32px !important;
         align-items: start !important;
         justify-content: center !important;
     }
 
     .dday-board-layout-v2 .compact-card:first-child {
         width: 100% !important;
-        max-width: 430px !important;
+        max-width: 480px !important;
+        padding: 26px 26px !important;
+        box-sizing: border-box !important;
+    }
+
+    .dday-board-layout-v2 .practice-panel-head p {
+        max-width: 100% !important;
+    }
+
+    .dday-board-layout-v2 .practice-form input {
+        box-sizing: border-box !important;
     }
 
     .dday-board-layout-v2 .two-column-inputs {
         grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
-        gap: 12px !important;
+        gap: 14px !important;
     }
 
     .dday-board-layout-v2 .two-column-inputs > div,
@@ -2874,19 +2884,19 @@ textarea {
 
     .dday-board-layout-v2 .practice-form input[type="date"] {
         width: 100% !important;
-        padding-left: 16px !important;
-        padding-right: 12px !important;
+        padding-left: 14px !important;
+        padding-right: 10px !important;
         letter-spacing: -0.02em !important;
     }
 }
 
 @media (min-width: 1500px) {
     .compact-practice-section .dday-board-layout-v2 {
-        max-width: 1280px !important;
-        grid-template-columns: 440px minmax(0, 760px) !important;
+        max-width: 1340px !important;
+        grid-template-columns: 500px minmax(0, 1fr) !important;
     }
 
     .dday-board-layout-v2 .compact-card:first-child {
-        max-width: 440px !important;
+        max-width: 500px !important;
     }
 }
