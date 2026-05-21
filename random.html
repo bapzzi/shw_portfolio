@@ -135,13 +135,48 @@
         snack: '분식·간단식',
         mixed: '전체 랜덤'
       };
-      var menus = {
+      /* ── localStorage 저장/로드 ─────────────────────────────────
+       * 'random-menus' 키로 브라우저에 영구 저장합니다.
+       * 사용자가 [세부 메뉴 저장] 버튼을 누를 때마다 갱신됩니다. */
+      var STORAGE_KEY = 'random-menus';
+      var DEFAULT_MENUS = {
         korean: ['김치찌개', '된장찌개', '제육볶음', '순대국', '비빔밥', '갈비탕', '부대찌개', '칼국수'],
         western: ['파스타', '스테이크', '피자', '리조또', '샐러드볼', '햄버거', '그라탕', '오믈렛'],
         chinese: ['짜장면', '짬뽕', '마라탕', '탕수육', '마파두부', '볶음밥', '우육면', '꿔바로우'],
         japanese: ['초밥', '라멘', '돈카츠', '우동', '규동', '카레라이스', '오코노미야키', '소바'],
         snack: ['떡볶이', '김밥', '라면', '토스트', '샌드위치', '쫄면', '핫도그', '주먹밥']
       };
+
+      // 깊은 복사용 — 기본값이 참조 공유되어 오염되는 걸 막습니다.
+      function cloneDefaults() {
+        return JSON.parse(JSON.stringify(DEFAULT_MENUS));
+      }
+
+      function loadMenus() {
+        try {
+          var raw = localStorage.getItem(STORAGE_KEY);
+          if (raw === null) return cloneDefaults(); // 첫 방문이면 기본값
+          var parsed = JSON.parse(raw);
+          // 키 누락에 대비해 기본값 위에 사용자 값을 덮어쓰는 방식으로 병합
+          var merged = cloneDefaults();
+          Object.keys(parsed).forEach(function (key) {
+            if (Array.isArray(parsed[key])) merged[key] = parsed[key];
+          });
+          return merged;
+        } catch (err) {
+          return cloneDefaults();
+        }
+      }
+
+      function saveMenus() {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(menus));
+        } catch (err) {
+          // 용량 초과 등은 무시
+        }
+      }
+
+      var menus = loadMenus();
 
       function getItems(category) {
         if (category === 'mixed') {
@@ -167,6 +202,7 @@
             .map(function (item) { return item.trim(); })
             .filter(function (item) { return item.length > 0; });
         });
+        saveMenus();
         descEl.textContent = '카테고리별 세부 메뉴가 저장되었습니다.';
       }
 
