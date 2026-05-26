@@ -3322,3 +3322,20 @@ textarea {
     margin-right: auto;
     line-height: 1.75;
 }
+
+/* ===== Home hero title full-screen line break fix ===================== */
+@media (min-width: 880px) {
+    .hero-grid {
+        grid-template-columns: 1.55fr 0.95fr;
+        gap: 64px;
+    }
+
+    .hero-title {
+        font-size: clamp(2.4rem, 4.4vw, 3.05rem);
+        white-space: nowrap;
+    }
+
+    .hero-title-en {
+        white-space: normal;
+    }
+}
