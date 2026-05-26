@@ -176,6 +176,51 @@
       </div>
     </section>
 
+
+    <!-- ====================================================
+         방명록 댓글 — 13주차 DOM 추가/삭제 실습
+         ==================================================== -->
+    <section class="section guestbook-section" id="guestbook" aria-labelledby="guestbook-title">
+      <div class="container">
+        <div class="guestbook-grid">
+          <article class="guestbook-intro fade-in">
+            <span class="section-eyebrow">// Guestbook</span>
+            <h2 class="section-title" id="guestbook-title">짧은 댓글을 남겨주세요.</h2>
+            <p class="section-desc">
+              포트폴리오를 보고 느낀 점을 짧게 남길 수 있는 공간입니다.
+              댓글을 남기면 작성 시간과 함께 목록에 추가되고, 좋아요와 싫어요도 누를 수 있습니다.
+            </p>
+          </article>
+
+          <article class="guestbook-card fade-in">
+            <form class="guestbook-form" id="guestbook-form" aria-label="댓글 남기기 폼">
+              <div class="form-row">
+                <label for="comment-name">이름</label>
+                <input id="comment-name" type="text" placeholder="이름 또는 닉네임" required />
+              </div>
+              <div class="form-row">
+                <label for="comment-message">댓글</label>
+                <textarea id="comment-message" rows="4" placeholder="포트폴리오에 대한 짧은 의견을 남겨주세요." required></textarea>
+              </div>
+              <div class="guestbook-actions">
+                <button class="btn btn-primary" type="submit">댓글 추가하기</button>
+                <button class="btn btn-outline" type="button" id="clear-comments">전체 삭제</button>
+              </div>
+              <p class="form-result" id="guestbook-result" role="status" aria-live="polite"></p>
+            </form>
+
+            <div class="comment-list-wrap">
+              <div class="comment-list-head">
+                <p class="hero-card-label">Comments</p>
+                <span id="comment-count">0개 댓글</span>
+              </div>
+              <ul class="comment-list" id="comment-list" aria-live="polite"></ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
   </main>
 
 

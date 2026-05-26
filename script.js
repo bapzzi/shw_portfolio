@@ -270,9 +270,16 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function dateValue(card) {
-        var value = card.dataset.date || '1900-01';
+        var value = card.dataset.date || '1900-01-01';
         var parts = value.split('-');
-        return new Date(Number(parts[0]), Number(parts[1] || 1) - 1, 1).getTime();
+        var year = Number(parts[0]) || 1900;
+        var month = Number(parts[1] || 1) - 1;
+        var day = Number(parts[2] || 1);
+        return new Date(year, month, day).getTime();
+    }
+
+    function orderValue(card) {
+        return Number(card.dataset.order || 999);
     }
 
     function sortCards(mode) {
@@ -280,7 +287,7 @@ document.addEventListener('DOMContentLoaded', function () {
             var diff = dateValue(b) - dateValue(a);
             if (mode === 'oldest') diff = diff * -1;
             if (diff !== 0) return diff;
-            return (a.dataset.title || '').localeCompare(b.dataset.title || '', 'ko');
+            return orderValue(a) - orderValue(b);
         });
 
         sorted.forEach(function (card) {
@@ -327,4 +334,247 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     renderProjects();
+});
+
+
+/* ===== 7. DOM Style Lab — 스타일 선택 / 미리보기 ================ */
+document.addEventListener('DOMContentLoaded', function () {
+    var target = document.getElementById('style-target');
+    if (!target) return;
+
+    var textInput = document.getElementById('style-text-input');
+    var fontSelect = document.getElementById('font-select');
+    var sizeSelect = document.getElementById('font-size-select');
+    var colorSelect = document.getElementById('text-color-select');
+    var bgSelect = document.getElementById('bg-color-select');
+    var weightSelect = document.getElementById('weight-select');
+    var alignSelect = document.getElementById('align-select');
+    var applyBtn = document.getElementById('apply-style-btn');
+    var resetBtn = document.getElementById('reset-style-btn');
+    var toggleBtn = document.getElementById('toggle-target-btn');
+    var isHidden = false;
+
+    function applyStyle() {
+        target.textContent = textInput && textInput.value.trim()
+            ? textInput.value.trim()
+            : '문장을 입력해 주세요.';
+        target.style.fontFamily = fontSelect ? fontSelect.value : 'var(--font-sans)';
+        target.style.fontSize = sizeSelect ? sizeSelect.value : '20px';
+        target.style.color = colorSelect ? colorSelect.value : 'var(--text)';
+        target.style.backgroundColor = bgSelect ? bgSelect.value : 'var(--surface)';
+        target.style.fontWeight = weightSelect ? weightSelect.value : '400';
+        target.style.textAlign = alignSelect ? alignSelect.value : 'center';
+    }
+
+    function resetStyle() {
+        if (textInput) textInput.value = '이 문장의 스타일을 원하는 대로 바꿔보세요!';
+        if (fontSelect) fontSelect.value = 'var(--font-sans)';
+        if (sizeSelect) sizeSelect.value = '20px';
+        if (colorSelect) colorSelect.value = 'var(--text)';
+        if (bgSelect) bgSelect.value = 'var(--surface)';
+        if (weightSelect) weightSelect.value = '400';
+        if (alignSelect) alignSelect.value = 'center';
+        target.style.display = 'block';
+        isHidden = false;
+        if (toggleBtn) toggleBtn.textContent = '숨기기';
+        applyStyle();
+    }
+
+    [textInput, fontSelect, sizeSelect, colorSelect, bgSelect, weightSelect, alignSelect].forEach(function (control) {
+        if (!control) return;
+        control.addEventListener('input', applyStyle);
+        control.addEventListener('change', applyStyle);
+    });
+
+    if (applyBtn) applyBtn.addEventListener('click', applyStyle);
+    if (resetBtn) resetBtn.addEventListener('click', resetStyle);
+
+    if (toggleBtn) {
+        toggleBtn.addEventListener('click', function () {
+            target.style.display = isHidden ? 'block' : 'none';
+            toggleBtn.textContent = isHidden ? '숨기기' : '보이기';
+            isHidden = !isHidden;
+        });
+    }
+
+    applyStyle();
+});
+
+/* ===== 8. Contact Guestbook — 댓글 추가 / 삭제 ================ */
+document.addEventListener('DOMContentLoaded', function () {
+    var guestbookForm = document.getElementById('guestbook-form');
+    if (!guestbookForm) return;
+
+    var nameInput = document.getElementById('comment-name');
+    var messageInput = document.getElementById('comment-message');
+    var commentList = document.getElementById('comment-list');
+    var commentCount = document.getElementById('comment-count');
+    var clearBtn = document.getElementById('clear-comments');
+    var resultEl = document.getElementById('guestbook-result');
+    var STORAGE_KEY = 'shw-guestbook-comments';
+
+    function getSavedComments() {
+        try {
+            return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+        } catch (error) {
+            return [];
+        }
+    }
+
+    function saveComments(comments) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(comments));
+    }
+
+    function updateCount() {
+        var count = commentList ? commentList.children.length : 0;
+        if (commentCount) commentCount.textContent = count + '개 댓글';
+    }
+
+    function formatCount(value) {
+        return Number(value || 0).toString();
+    }
+
+    function updateStoredComment(id, updater) {
+        var comments = getSavedComments().map(function (saved) {
+            if (saved.id !== id) return saved;
+            return updater(saved);
+        });
+        saveComments(comments);
+    }
+
+    function makeCommentItem(comment) {
+        comment.likes = Number(comment.likes || 0);
+        comment.dislikes = Number(comment.dislikes || 0);
+
+        var item = document.createElement('li');
+        item.className = 'comment-item';
+        item.dataset.commentId = comment.id;
+
+        var body = document.createElement('div');
+        body.className = 'comment-body';
+
+        var meta = document.createElement('p');
+        meta.className = 'comment-meta';
+        meta.textContent = comment.name + ' · ' + comment.date;
+
+        var text = document.createElement('p');
+        text.className = 'comment-text';
+        text.textContent = comment.message;
+
+        var actions = document.createElement('div');
+        actions.className = 'comment-actions';
+
+        var likeBtn = document.createElement('button');
+        likeBtn.type = 'button';
+        likeBtn.className = 'comment-reaction';
+        likeBtn.textContent = '좋아요 ' + formatCount(comment.likes);
+
+        var dislikeBtn = document.createElement('button');
+        dislikeBtn.type = 'button';
+        dislikeBtn.className = 'comment-reaction';
+        dislikeBtn.textContent = '싫어요 ' + formatCount(comment.dislikes);
+
+        var deleteBtn = document.createElement('button');
+        deleteBtn.type = 'button';
+        deleteBtn.className = 'comment-delete';
+        deleteBtn.textContent = '삭제';
+
+        likeBtn.addEventListener('click', function () {
+            comment.likes += 1;
+            likeBtn.textContent = '좋아요 ' + formatCount(comment.likes);
+            updateStoredComment(comment.id, function (saved) {
+                saved.likes = Number(saved.likes || 0) + 1;
+                return saved;
+            });
+        });
+
+        dislikeBtn.addEventListener('click', function () {
+            comment.dislikes += 1;
+            dislikeBtn.textContent = '싫어요 ' + formatCount(comment.dislikes);
+            updateStoredComment(comment.id, function (saved) {
+                saved.dislikes = Number(saved.dislikes || 0) + 1;
+                return saved;
+            });
+        });
+
+        deleteBtn.addEventListener('click', function () {
+            if (commentList && item.parentNode === commentList) {
+                commentList.removeChild(item);
+            }
+            var comments = getSavedComments().filter(function (saved) {
+                return saved.id !== comment.id;
+            });
+            saveComments(comments);
+            updateCount();
+            if (resultEl) resultEl.textContent = '댓글을 삭제했습니다.';
+        });
+
+        body.appendChild(meta);
+        body.appendChild(text);
+        actions.appendChild(likeBtn);
+        actions.appendChild(dislikeBtn);
+        actions.appendChild(deleteBtn);
+        item.appendChild(body);
+        item.appendChild(actions);
+        return item;
+    }
+
+    function renderComments() {
+        if (!commentList) return;
+        commentList.innerHTML = '';
+        getSavedComments().forEach(function (comment) {
+            commentList.appendChild(makeCommentItem(comment));
+        });
+        updateCount();
+    }
+
+    guestbookForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        var name = nameInput.value.trim();
+        var message = messageInput.value.trim();
+
+        if (!name || !message) {
+            if (resultEl) resultEl.textContent = '이름과 댓글을 모두 입력해 주세요.';
+            return;
+        }
+
+        var comment = {
+            id: 'comment-' + Date.now(),
+            name: name,
+            message: message,
+            date: new Date().toLocaleString('ko-KR', { dateStyle: 'medium', timeStyle: 'short' }),
+            likes: 0,
+            dislikes: 0
+        };
+
+        var comments = getSavedComments();
+        comments.unshift(comment);
+        saveComments(comments);
+
+        if (commentList) {
+            commentList.insertBefore(makeCommentItem(comment), commentList.firstChild);
+        }
+
+        guestbookForm.reset();
+        updateCount();
+        if (resultEl) resultEl.textContent = '댓글이 추가되었습니다.';
+    });
+
+    if (clearBtn) {
+        clearBtn.addEventListener('click', function () {
+            if (!commentList || commentList.children.length === 0) {
+                if (resultEl) resultEl.textContent = '삭제할 댓글이 없습니다.';
+                return;
+            }
+            while (commentList.firstChild) {
+                commentList.removeChild(commentList.firstChild);
+            }
+            saveComments([]);
+            updateCount();
+            if (resultEl) resultEl.textContent = '모든 댓글을 삭제했습니다.';
+        });
+    }
+
+    renderComments();
 });

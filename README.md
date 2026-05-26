@@ -124,3 +124,38 @@ shw_portfolio/
 개인 포트폴리오. 학습 목적의 코드 참고는 자유롭게 가능합니다.
 
 © 2026 Shin Haewon
+
+
+---
+
+## 🧪 13주차 DOM 객체 제어 및 동적 문서 구성 실습 반영
+
+인터넷활용 13주차 실습 요구사항을 기존 포트폴리오의 디자인 톤에 맞춰 확장했습니다.
+
+### DOM Style Lab
+
+`dom_style.html`은 DOM 객체의 `style` 프로퍼티를 직접 제어하는 실습 페이지입니다.  
+버튼 클릭에 따라 타겟 문장의 글자색, 글자 크기, 배경색, 표시 여부가 즉시 변경됩니다.
+
+사용한 핵심 개념은 다음과 같습니다.
+
+- `document.getElementById()`로 변경 대상 요소 선택
+- `style.color`로 글자색 변경
+- `style.fontSize`로 글자 크기 변경
+- `style.backgroundColor`로 배경색 변경
+- `style.display`로 숨기기/보이기 토글
+
+### Contact Guestbook Comments
+
+`contact.html#guestbook`은 Contact 페이지 하단에 통합한 댓글 추가/삭제 실습입니다.  
+사용자가 이름과 댓글을 입력하면 JavaScript가 새로운 댓글 카드를 생성해 목록에 추가하고,
+삭제 버튼을 누르면 해당 댓글 요소를 DOM에서 제거합니다.
+
+사용한 핵심 개념은 다음과 같습니다.
+
+- `createElement()`로 댓글 카드 요소 생성
+- `appendChild()`와 `insertBefore()`로 댓글 목록에 추가
+- `removeChild()`로 댓글 삭제
+- `localStorage`로 새로고침 이후에도 댓글 유지
+
+두 실습은 `portfolio.html`의 프로젝트 카드에 연결되어 있으며, 기존 D-Day 계산기와 저녁 메뉴 랜덤 뽑기처럼 포트폴리오 내부 JavaScript 실습 프로젝트로 구성했습니다.

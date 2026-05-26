@@ -2900,3 +2900,425 @@ textarea {
         max-width: 500px !important;
     }
 }
+
+
+/* ===== 17. DOM Style Lab / Guestbook (13주차 실습) ============ */
+.dom-style-section,
+.guestbook-section {
+    background: linear-gradient(180deg, var(--bg), var(--surface));
+}
+
+.dom-style-layout {
+    max-width: 860px;
+}
+
+.dom-style-panel,
+.guestbook-card,
+.guestbook-intro {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+}
+
+.dom-style-panel {
+    padding: 36px;
+}
+
+.dom-target-card {
+    margin: 28px 0 24px;
+    padding: 24px;
+    border: 1px dashed var(--border);
+    border-radius: var(--radius);
+    background: var(--bg);
+}
+
+.style-target-text {
+    width: 100%;
+    padding: 22px;
+    border: 2px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    color: var(--text);
+    font-size: 20px;
+    font-weight: 800;
+    text-align: center;
+    line-height: 1.6;
+    transition: all var(--t-slow);
+}
+
+.style-control-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.dom-code-note {
+    margin-top: 24px;
+    padding: 20px;
+    border-radius: var(--radius);
+    background: var(--accent-soft);
+    border: 1px solid rgba(79, 70, 229, 0.16);
+}
+
+.dom-code-note p:last-child {
+    color: var(--text-soft);
+    line-height: 1.7;
+    font-size: 0.93rem;
+}
+
+.guestbook-grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.25fr;
+    gap: 32px;
+    align-items: start;
+}
+
+.guestbook-intro,
+.guestbook-card {
+    padding: 32px;
+}
+
+.guestbook-note {
+    margin-top: 28px;
+}
+
+.guestbook-form {
+    display: grid;
+    gap: 18px;
+}
+
+.guestbook-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.comment-list-wrap {
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-soft);
+}
+
+.comment-list-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+.comment-list-head .hero-card-label {
+    margin-bottom: 0;
+}
+
+.comment-list-head span {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.comment-list {
+    display: grid;
+    gap: 12px;
+}
+
+.comment-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 18px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg);
+}
+
+.comment-body {
+    min-width: 0;
+}
+
+.comment-meta {
+    margin-bottom: 6px;
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    color: var(--accent);
+}
+
+.comment-text {
+    color: var(--text-soft);
+    line-height: 1.65;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+}
+
+.comment-delete {
+    align-self: start;
+    flex-shrink: 0;
+    padding: 7px 10px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--surface);
+    color: var(--text-soft);
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: border-color var(--t-base), color var(--t-base), background var(--t-base);
+}
+
+.comment-delete:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--accent-soft);
+}
+
+@media (max-width: 880px) {
+    .style-control-grid,
+    .guestbook-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 560px) {
+    .dom-style-panel,
+    .guestbook-intro,
+    .guestbook-card {
+        padding: 24px;
+    }
+
+    .style-target-text {
+        font-size: 18px;
+        padding: 18px;
+    }
+
+    .comment-item {
+        flex-direction: column;
+    }
+}
+
+
+/* ===== 18. DOM Style Lab / Guestbook refinement ============ */
+.dom-editor-grid {
+    display: grid;
+    gap: 22px;
+    margin-top: 28px;
+}
+
+.dom-text-input-row textarea,
+.style-dropdown-grid select {
+    width: 100%;
+    padding: 12px 14px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    transition: border-color var(--t-base), background var(--t-base), box-shadow var(--t-base);
+}
+
+.dom-text-input-row textarea:focus,
+.style-dropdown-grid select:focus {
+    outline: none;
+    border-color: var(--accent);
+    background: var(--surface);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.style-dropdown-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.style-action-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.comment-item {
+    align-items: flex-start;
+}
+
+.comment-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    flex-shrink: 0;
+}
+
+.comment-reaction,
+.comment-delete {
+    min-height: 34px;
+}
+
+.comment-reaction {
+    padding: 7px 10px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--surface);
+    color: var(--text-soft);
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: border-color var(--t-base), color var(--t-base), background var(--t-base), transform var(--t-base);
+}
+
+.comment-reaction:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--accent-soft);
+    transform: translateY(-1px);
+}
+
+@media (max-width: 880px) {
+    .style-dropdown-grid,
+    .style-action-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .comment-actions {
+        justify-content: flex-start;
+    }
+}
+
+/* ===== 19. Fullscreen line-break fix for DOM / Guestbook ===== */
+.guestbook-intro .section-title,
+.guestbook-intro .section-desc,
+.dom-style-panel .practice-panel-head h2,
+.dom-style-panel .practice-panel-head p,
+.style-target-text {
+    word-break: keep-all;
+    overflow-wrap: normal;
+}
+
+.guestbook-intro .section-title {
+    font-size: clamp(1.85rem, 2.7vw, 2.25rem);
+    letter-spacing: -0.035em;
+    line-height: 1.22;
+}
+
+.guestbook-intro .section-desc {
+    max-width: 100%;
+}
+
+.dom-style-layout {
+    max-width: 980px;
+}
+
+.dom-style-panel .practice-panel-head h2 {
+    font-size: clamp(1.7rem, 2.8vw, 2.15rem);
+    line-height: 1.25;
+}
+
+@media (min-width: 1280px) {
+    .guestbook-grid {
+        grid-template-columns: minmax(420px, 0.82fr) minmax(0, 1.18fr);
+    }
+}
+
+@media (max-width: 560px) {
+    .guestbook-intro .section-title,
+    .dom-style-panel .practice-panel-head h2 {
+        font-size: 1.75rem;
+    }
+}
+
+/* ===== 20. Guestbook desktop width / DOM control compact fix ===== */
+@media (min-width: 1100px) {
+    .guestbook-section .container {
+        max-width: 1320px;
+    }
+
+    .guestbook-grid {
+        grid-template-columns: minmax(520px, 0.95fr) minmax(0, 1.35fr);
+        gap: 36px;
+    }
+
+    .guestbook-intro .section-title {
+        white-space: nowrap;
+        font-size: clamp(2.05rem, 2.45vw, 2.55rem);
+        line-height: 1.14;
+    }
+
+    .guestbook-intro .section-desc {
+        max-width: 480px;
+        line-height: 1.85;
+    }
+}
+
+@media (min-width: 1500px) {
+    .guestbook-section .container {
+        max-width: 1420px;
+    }
+
+    .guestbook-grid {
+        grid-template-columns: minmax(560px, 0.92fr) minmax(0, 1.38fr);
+    }
+
+    .guestbook-intro .section-desc {
+        max-width: 520px;
+    }
+}
+
+@media (max-width: 1099px) {
+    .guestbook-intro .section-title {
+        white-space: normal;
+    }
+}
+
+.dom-input-card {
+    margin-top: 24px;
+}
+
+.dom-text-input-row textarea {
+    min-height: 92px;
+    padding: 10px 12px;
+    font-size: 0.9rem;
+    line-height: 1.55;
+}
+
+.style-dropdown-grid {
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.style-dropdown-grid .form-row {
+    gap: 4px;
+}
+
+.style-dropdown-grid .form-row label {
+    font-size: 0.78rem;
+}
+
+.style-dropdown-grid select {
+    min-height: 42px;
+    padding: 9px 11px;
+    font-size: 0.88rem;
+}
+
+.dom-target-card {
+    margin: 22px 0 20px;
+    padding: 20px;
+}
+
+.style-action-grid {
+    gap: 10px;
+}
+
+.style-action-grid .btn {
+    padding: 10px 16px;
+    font-size: 0.88rem;
+}
+
+
+/* ===== 21. DOM Style Lab line-break refinement ===== */
+@media (min-width: 960px) {
+    .dom-style-page-desc {
+        max-width: none;
+        white-space: nowrap;
+    }
+}
+
+.dom-style-panel .practice-panel-head p {
+    max-width: 680px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.75;
+}
