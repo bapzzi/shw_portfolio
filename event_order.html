@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<!--
+  =============================================================
+  신해원 포트폴리오 — Smart Pizza Order (event_order.html)
+  광운대학교 인터넷활용 / 2026
+  -------------------------------------------------------------
+  15주차 이벤트 프로그래밍 실습 1 (배달의민족 구조 참조)
+    - onchange : 체크박스 / 수량 변경 → 합계 실시간 계산
+    - onblur   : 배달 주소 입력 확인
+    - onsubmit : 폼 전송 제어 (event.preventDefault)
+        · 주문 조건 1) 피자 최소 한 판 필수 (사이드·음료만으론 주문 불가)
+        · 주문 조건 2) 배달 주소 필수
+  =============================================================
+-->
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Pizza Order · 신해원 포트폴리오</title>
+  <meta name="description" content="배달의민족 구조를 참조해 onchange·onblur·onsubmit 이벤트로 합계를 실시간 계산하고 주문 조건을 검증하는 JavaScript 실습 페이지." />
+
+  <link rel="stylesheet" as="style" crossorigin
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* 페이지 고유 스타일 (style.css 미수정 원칙 → 여기에만 둠) */
+
+    /* 가게 헤더 */
+    .store-head {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      padding: 20px;
+      border: 1px solid var(--border, #e5e7eb);
+      border-radius: 16px;
+      background: var(--surface, #fff);
+      margin-bottom: 24px;
+    }
+    .store-thumb {
+      width: 66px; height: 66px;
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem;
+      border-radius: 16px;
+      background: rgba(79, 70, 229, 0.08);
+    }
+    .store-info h2 { margin: 0 0 4px; font-size: 1.3rem; }
+    .store-rating, .store-delivery {
+      margin: 2px 0;
+      color: var(--text-muted, #6b7280);
+      font-size: 0.9rem;
+    }
+
+    /* 메뉴 카테고리 */
+    .menu-group { margin-bottom: 28px; }
+    .menu-group-title {
+      display: flex; align-items: center; gap: 10px;
+      margin: 0 0 12px;
+      padding-bottom: 10px;
+      font-size: 1.12rem; font-weight: 700;
+      border-bottom: 2px solid var(--border, #eee);
+    }
+    .req-badge {
+      font-size: 0.72rem; font-weight: 700;
+      color: #fff; background: var(--accent, #4f46e5);
+      padding: 3px 10px; border-radius: 999px;
+    }
+    .opt-badge {
+      font-size: 0.72rem; font-weight: 600;
+      color: var(--text-muted, #6b7280); background: rgba(0, 0, 0, 0.05);
+      padding: 3px 10px; border-radius: 999px;
+    }
+
+    /* 메뉴 항목 (체크박스 + 설명 + 가격 + 수량) */
+    .menu-item {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 16px;
+      margin-bottom: 10px;
+      border: 1px solid var(--border, #eee);
+      border-radius: 14px;
+      cursor: pointer;
+      transition: border-color .15s ease, background .15s ease;
+    }
+    .menu-item:hover { border-color: var(--accent, #4f46e5); }
+    .menu-item.is-selected {
+      border-color: var(--accent, #4f46e5);
+      background: rgba(79, 70, 229, 0.05);
+    }
+    .menu-item .menu-check {
+      width: 20px; height: 20px;
+      margin-top: 2px;
+      flex-shrink: 0;
+      accent-color: var(--accent, #4f46e5);
+      cursor: pointer;
+    }
+    .menu-item-body { flex: 1; }
+    .menu-item-name { margin: 0 0 4px; font-weight: 700; font-size: 1.02rem; }
+    .menu-item-desc { margin: 0 0 6px; color: var(--text-muted, #6b7280); font-size: 0.88rem; }
+    .menu-item-price { margin: 0; font-weight: 700; }
+    .qty-stepper {
+      display: flex; align-items: center;
+      flex-shrink: 0;
+      border: 1px solid var(--border, #ddd);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .qty-btn {
+      width: 34px; height: 36px;
+      border: none;
+      background: var(--surface, #f8f8f8);
+      color: var(--text, #111);
+      font-size: 1.15rem; font-weight: 700; line-height: 1;
+      cursor: pointer;
+      transition: background .12s ease, color .12s ease;
+    }
+    .qty-btn:hover { background: rgba(79, 70, 229, 0.1); color: var(--accent, #4f46e5); }
+    .qty-btn:active { background: rgba(79, 70, 229, 0.2); }
+    .menu-qty {
+      width: 42px; height: 36px;
+      border: none;
+      border-left: 1px solid var(--border, #eee);
+      border-right: 1px solid var(--border, #eee);
+      background: #fff;
+      text-align: center;
+      font-family: var(--font-mono, monospace);
+      font-weight: 700;
+      color: var(--text, #111);
+      pointer-events: none; /* 클릭·선택 불가 (직접 입력 차단) */
+    }
+
+    /* 배달 주소 */
+    .addr-card {
+      margin-top: 26px;
+      padding: 18px;
+      border: 1px solid var(--border, #eee);
+      border-radius: 14px;
+    }
+    .addr-card label { display: block; font-weight: 700; margin-bottom: 8px; }
+    #addr {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--border, #ddd);
+      border-radius: 12px;
+      font-size: 1rem;
+    }
+    #addr.is-error { border-color: #ef4444; background: #fef2f2; }
+
+    /* 하단 결제 바 */
+    .order-bar {
+      position: sticky;
+      bottom: 16px;
+      margin-top: 24px;
+      padding: 18px 20px;
+      border-radius: 16px;
+      background: var(--surface-strong, #0f172a);
+      color: #fff;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+    }
+    .order-amounts {
+      display: flex; justify-content: space-between;
+      font-size: 0.9rem; opacity: 0.85;
+    }
+    .order-total-row {
+      display: flex; justify-content: space-between; align-items: baseline;
+      margin: 10px 0 14px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    .order-total-row .order-total-label { font-weight: 600; }
+    #total-display {
+      font-family: var(--font-mono, monospace);
+      font-size: 1.5rem; font-weight: 800;
+    }
+    .order-submit { width: 100%; }
+    .clear-link {
+      display: block;
+      margin: 14px auto 0;
+      background: none; border: none;
+      color: var(--text-muted, #6b7280);
+      text-decoration: underline;
+      cursor: pointer;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand" aria-label="홈으로">
+        <span class="brand-mark">SHW</span>
+        <span class="brand-suffix">/portfolio</span>
+      </a>
+      <nav class="primary-nav" aria-label="주 메뉴">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="compact-page-header">
+      <div class="container">
+        <span class="section-eyebrow">JavaScript Practice 05</span>
+        <h1 class="section-title">Smart Pizza Order</h1>
+        <p class="section-desc">
+          배달의민족 주문 화면 구조를 참조한 실습입니다. 메뉴를 고르면 합계가 실시간으로
+          바뀌고, <b>피자 최소 한 판</b>과 <b>배달 주소</b>를 모두 채워야 주문이 완료됩니다.
+        </p>
+      </div>
+    </section>
+
+    <section class="compact-practice-section">
+      <div class="container">
+        <article class="practice-panel compact-card fade-in">
+
+          <!-- 가게 헤더 -->
+          <div class="store-head">
+            <div class="store-thumb" aria-hidden="true">🍕</div>
+            <div class="store-info">
+              <h2>신해원 피자 · 광운대점</h2>
+              <p class="store-rating">⭐ 4.9 (1,284) · 피자 · 양식</p>
+              <p class="store-delivery">🛵 배달 30~40분 · 최소주문 15,000원 · 배달팁 3,000원</p>
+            </div>
+          </div>
+
+          <form action="#" onsubmit="return validate(event)">
+
+            <!-- 피자 (최소 1판 필수) -->
+            <section class="menu-group">
+              <h3 class="menu-group-title">피자 <span class="req-badge">최소 1판 필수</span></h3>
+
+              <label class="menu-item">
+                <input type="checkbox" class="menu-check" data-kind="pizza" value="18900" onchange="recalc()">
+                <div class="menu-item-body">
+                  <p class="menu-item-name">콤비네이션 피자</p>
+                  <p class="menu-item-desc">햄, 피망, 양파, 올리브가 가득</p>
+                  <p class="menu-item-price">18,900원</p>
+                </div>
+                <div class="qty-stepper" aria-label="수량 조절">
+                  <button type="button" class="qty-btn" onclick="stepQty(this, -1)" aria-label="수량 줄이기">−</button>
+                  <input type="text" class="menu-qty" value="1" readonly tabindex="-1" aria-label="수량">
+                  <button type="button" class="qty-btn" onclick="stepQty(this, 1)" aria-label="수량 늘리기">+</button>
+                </div>
+              </label>
+
+              <label class="menu-item">
+                <input type="checkbox" class="menu-check" data-kind="pizza" value="16900" onchange="recalc()">
+                <div class="menu-item-body">
+                  <p class="menu-item-name">페퍼로니 피자</p>
+                  <p class="menu-item-desc">짭짤한 페퍼로니를 듬뿍 올린 클래식</p>
+                  <p class="menu-item-price">16,900원</p>
+                </div>
+                <div class="qty-stepper" aria-label="수량 조절">
+                  <button type="button" class="qty-btn" onclick="stepQty(this, -1)" aria-label="수량 줄이기">−</button>
+                  <input type="text" class="menu-qty" value="1" readonly tabindex="-1" aria-label="수량">
+                  <button type="button" class="qty-btn" onclick="stepQty(this, 1)" aria-label="수량 늘리기">+</button>
+                </div>
+              </label>
+
+              <label class="menu-item">
+                <input type="checkbox" class="menu-check" data-kind="pizza" value="19900" onchange="recalc()">
+                <div class="menu-item-body">
+                  <p class="menu-item-name">불고기 피자</p>
+                  <p class="menu-item-desc">달콤짭짤 불고기 토핑이 가득</p>
+                  <p class="menu-item-price">19,900원</p>
+                </div>
+                <div class="qty-stepper" aria-label="수량 조절">
+                  <button type="button" class="qty-btn" onclick="stepQty(this, -1)" aria-label="수량 줄이기">−</button>
+                  <input type="text" class="menu-qty" value="1" readonly tabindex="-1" aria-label="수량">
+                  <button type="button" class="qty-btn" onclick="stepQty(this, 1)" aria-label="수량 늘리기">+</button>
+                </div>
+              </label>
+
+              <label class="menu-item">
+                <input type="checkbox" class="menu-check" data-kind="pizza" value="20900" onchange="recalc()">
+                <div class="menu-item-body">
+                  <p class="menu-item-name">포테이토 피자</p>
+                  <p class="menu-item-desc">감자와 베이컨, 치즈의 고소한 조화</p>
+                  <p class="menu-item-price">20,900원</p>
+                </div>
+                <div class="qty-stepper" aria-label="수량 조절">
+                  <button type="button" class="qty-btn" onclick="stepQty(this, -1)" aria-label="수량 줄이기">−</button>
+                  <input type="text" class="menu-qty" value="1" readonly tabindex="-1" aria-label="수량">
+                  <button type="button" class="qty-btn" onclick="stepQty(this, 1)" aria-label="수량 늘리기">+</button>
+                </div>
+              </label>
+            </section>
+
+            <!-- 사이드 -->
+            <section class="menu-group">
+              <h3 class="menu-group-title">사이드 <span class="opt-badge">선택</span></h3>
+
+              <label class="menu-item">
+                <input type="checkbox" class="menu-check" data-kind="side" value="6500" onchange="recalc()">
+                <div class="menu-item-body">
+                  <p class="menu-item-name">갈릭 치즈스틱</p>
+                  <p class="menu-item-desc">겉바속촉 치즈스틱 5개</p>
+                  <p class="menu-item-price">6,500원</p>
+                </div>
+                <div class="qty-stepper" aria-label="수량 조절">
+                  <button type="button" class="qty-btn" onclick="stepQty(this, -1)" aria-label="수량 줄이기">−</button>
+                  <input type="text" class="menu-qty" value="1" readonly tabindex="-1" aria-label="수량">
+                  <button type="button" class="qty-btn" onclick="stepQty(this, 1)" aria-label="수량 늘리기">+</button>
+                </div>
+              </label>
+
+              <label class="menu-item">
+                <input type="checkbox" class="menu-check" data-kind="side" value="4500" onchange="recalc()">
+                <div class="menu-item-body">
+                  <p class="menu-item-name">양념감자</p>
+                  <p class="menu-item-desc">매콤달콤 시즈닝 감자튀김</p>
+                  <p class="menu-item-price">4,500원</p>
+                </div>
+                <div class="qty-stepper" aria-label="수량 조절">
+                  <button type="button" class="qty-btn" onclick="stepQty(this, -1)" aria-label="수량 줄이기">−</button>
+                  <input type="text" class="menu-qty" value="1" readonly tabindex="-1" aria-label="수량">
+                  <button type="button" class="qty-btn" onclick="stepQty(this, 1)" aria-label="수량 늘리기">+</button>
+                </div>
+              </label>
+
+              <label class="menu-item">
+                <input type="checkbox" class="menu-check" data-kind="side" value="8900" onchange="recalc()">
+                <div class="menu-item-body">
+                  <p class="menu-item-name">치킨텐더</p>
+                  <p class="menu-item-desc">순살 치킨텐더 6조각</p>
+                  <p class="menu-item-price">8,900원</p>
+                </div>
+                <div class="qty-stepper" aria-label="수량 조절">
+                  <button type="button" class="qty-btn" onclick="stepQty(this, -1)" aria-label="수량 줄이기">−</button>
+                  <input type="text" class="menu-qty" value="1" readonly tabindex="-1" aria-label="수량">
+                  <button type="button" class="qty-btn" onclick="stepQty(this, 1)" aria-label="수량 늘리기">+</button>
+                </div>
+              </label>
+            </section>
+
+            <!-- 음료 -->
+            <section class="menu-group">
+              <h3 class="menu-group-title">음료 <span class="opt-badge">선택</span></h3>
+
+              <label class="menu-item">
+                <input type="checkbox" class="menu-check" data-kind="drink" value="2500" onchange="recalc()">
+                <div class="menu-item-body">
+                  <p class="menu-item-name">콜라 1.25L</p>
+                  <p class="menu-item-desc">시원한 탄산음료</p>
+                  <p class="menu-item-price">2,500원</p>
+                </div>
+                <div class="qty-stepper" aria-label="수량 조절">
+                  <button type="button" class="qty-btn" onclick="stepQty(this, -1)" aria-label="수량 줄이기">−</button>
+                  <input type="text" class="menu-qty" value="1" readonly tabindex="-1" aria-label="수량">
+                  <button type="button" class="qty-btn" onclick="stepQty(this, 1)" aria-label="수량 늘리기">+</button>
+                </div>
+              </label>
+
+              <label class="menu-item">
+                <input type="checkbox" class="menu-check" data-kind="drink" value="2500" onchange="recalc()">
+                <div class="menu-item-body">
+                  <p class="menu-item-name">사이다 1.25L</p>
+                  <p class="menu-item-desc">깔끔한 레몬라임 탄산</p>
+                  <p class="menu-item-price">2,500원</p>
+                </div>
+                <div class="qty-stepper" aria-label="수량 조절">
+                  <button type="button" class="qty-btn" onclick="stepQty(this, -1)" aria-label="수량 줄이기">−</button>
+                  <input type="text" class="menu-qty" value="1" readonly tabindex="-1" aria-label="수량">
+                  <button type="button" class="qty-btn" onclick="stepQty(this, 1)" aria-label="수량 늘리기">+</button>
+                </div>
+              </label>
+            </section>
+
+            <!-- 추가 옵션 -->
+            <section class="menu-group">
+              <h3 class="menu-group-title">추가 옵션 <span class="opt-badge">선택</span></h3>
+
+              <label class="menu-item">
+                <input type="checkbox" class="menu-check" data-kind="option" value="3000" onchange="recalc()">
+                <div class="menu-item-body">
+                  <p class="menu-item-name">치즈 크러스트 변경</p>
+                  <p class="menu-item-desc">도우 가장자리에 치즈 가득</p>
+                  <p class="menu-item-price">3,000원</p>
+                </div>
+                <div class="qty-stepper" aria-label="수량 조절">
+                  <button type="button" class="qty-btn" onclick="stepQty(this, -1)" aria-label="수량 줄이기">−</button>
+                  <input type="text" class="menu-qty" value="1" readonly tabindex="-1" aria-label="수량">
+                  <button type="button" class="qty-btn" onclick="stepQty(this, 1)" aria-label="수량 늘리기">+</button>
+                </div>
+              </label>
+
+              <label class="menu-item">
+                <input type="checkbox" class="menu-check" data-kind="option" value="500" onchange="recalc()">
+                <div class="menu-item-body">
+                  <p class="menu-item-name">핫소스 추가</p>
+                  <p class="menu-item-desc">매콤함을 더하는 핫소스</p>
+                  <p class="menu-item-price">500원</p>
+                </div>
+                <div class="qty-stepper" aria-label="수량 조절">
+                  <button type="button" class="qty-btn" onclick="stepQty(this, -1)" aria-label="수량 줄이기">−</button>
+                  <input type="text" class="menu-qty" value="1" readonly tabindex="-1" aria-label="수량">
+                  <button type="button" class="qty-btn" onclick="stepQty(this, 1)" aria-label="수량 늘리기">+</button>
+                </div>
+              </label>
+            </section>
+
+            <!-- 배달 주소 (필수) -->
+            <div class="addr-card">
+              <label for="addr">📍 배달 주소 <span class="req-badge">필수</span></label>
+              <input type="text" id="addr" onblur="checkAddress()" placeholder="예) 서울 노원구 광운로 20, 101동 1004호">
+            </div>
+
+            <!-- 결제 바 -->
+            <div class="order-bar">
+              <div class="order-amounts">
+                <span>주문금액 <b id="subtotal">0원</b></span>
+                <span>배달팁 <b id="tip">0원</b></span>
+              </div>
+              <div class="order-total-row">
+                <span class="order-total-label">총 결제금액</span>
+                <span id="total-display">0원</span>
+              </div>
+              <button class="btn btn-primary order-submit" type="submit">주문하기</button>
+              <input type="hidden" id="total" value="0">
+            </div>
+
+            <button type="reset" class="clear-link" onclick="setTimeout(resetForm, 0)">선택 전체 비우기</button>
+          </form>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <p class="footer-brand-name">신해원 · Shin Haewon</p>
+        <p class="footer-brand-desc">
+          광운대학교 경영학부 / 예비 ERP 개발자.
+          비즈니스의 흐름을 코드로 옮기는 일에 관심이 있습니다.
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>Pages</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="mailto:win737449@gmail.com">win737449@gmail.com</a></li>
+          <li><a href="https://github.com/bapzzi" target="_blank" rel="noopener">github.com/bapzzi</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <small>© <span id="year"></span> Shin Haewon. All rights reserved.</small>
+      <small>Built with HTML · CSS · JavaScript</small>
+    </div>
+  </footer>
+
+  <script>
+    var DELIVERY_TIP = 3000; // 고정 배달팁
+
+    /* 숫자를 '12,000원' 형태로 변환 */
+    function won(n) {
+      return Number(n).toLocaleString("ko-KR") + "원";
+    }
+
+    /* 기능 1: 합계 실시간 계산 (onchange / onkeyup) */
+    function recalc() {
+      var subtotal = 0;
+      var checks = document.getElementsByClassName("menu-check");
+      var qtys = document.getElementsByClassName("menu-qty");
+
+      for (var i = 0; i < checks.length; i++) {
+        var item = checks[i].closest(".menu-item");
+        if (checks[i].checked) {
+          var price = parseInt(checks[i].value);
+          var quantity = parseInt(qtys[i].value);
+          if (isNaN(quantity) || quantity < 1) {
+            quantity = 1;
+            qtys[i].value = 1;
+          }
+          subtotal += price * quantity;
+          if (item) item.classList.add("is-selected");
+        } else {
+          if (item) item.classList.remove("is-selected");
+        }
+      }
+
+      var tip = subtotal > 0 ? DELIVERY_TIP : 0;
+      document.getElementById("total").value = subtotal;          // 검증·기준 금액
+      document.getElementById("subtotal").textContent = won(subtotal);
+      document.getElementById("tip").textContent = won(tip);
+      document.getElementById("total-display").textContent = won(subtotal + tip);
+    }
+
+    /* + / − 버튼으로만 수량 조절 (입력칸 직접 입력은 차단됨) */
+    function stepQty(btn, delta) {
+      var item = btn.closest(".menu-item");
+      var input = item.querySelector(".menu-qty");
+      var check = item.querySelector(".menu-check");
+
+      var value = (parseInt(input.value) || 1) + delta;
+      if (value < 1) value = 1;          // 최소 1개
+      input.value = value;
+
+      if (delta > 0) check.checked = true; // 수량을 늘리면 자동으로 선택됨
+      recalc();
+    }
+
+    /* 피자(메인)가 최소 한 판 선택됐는지 확인 */
+    function hasPizza() {
+      var checks = document.getElementsByClassName("menu-check");
+      for (var i = 0; i < checks.length; i++) {
+        if (checks[i].checked && checks[i].dataset.kind === "pizza") {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    /* 기능 2: 주소 입력 확인 (onblur) — 비어 있으면 빨갛게 강조 */
+    function checkAddress() {
+      var addr = document.getElementById("addr");
+      if (addr.value.trim() === "") {
+        addr.classList.add("is-error");
+      } else {
+        addr.classList.remove("is-error");
+      }
+    }
+
+    /* 기능 3: 주문 전송 제어 (onsubmit) — 두 조건을 모두 만족해야 완료 */
+    function validate(e) {
+      e.preventDefault(); // 페이지 이동 막기 (공통)
+
+      // 조건 1) 피자 최소 한 판
+      if (!hasPizza()) {
+        alert("피자는 최소 한 판 이상 주문해야 합니다. 🍕\n(사이드·음료만으로는 주문할 수 없어요.)");
+        return false;
+      }
+
+      // 조건 2) 배달 주소 필수
+      var addr = document.getElementById("addr");
+      if (addr.value.trim() === "") {
+        alert("배달 받으실 주소를 입력해주세요.");
+        addr.classList.add("is-error");
+        addr.focus();
+        return false;
+      }
+
+      // 완료
+      var subtotal = parseInt(document.getElementById("total").value) || 0;
+      var tip = subtotal > 0 ? DELIVERY_TIP : 0;
+      alert(
+        "주문이 완료되었습니다! 🎉\n" +
+        "총 결제금액: " + won(subtotal + tip) + " (배달팁 포함)\n" +
+        "배달 주소: " + addr.value.trim()
+      );
+      return false;
+    }
+
+    /* 초기화 버튼 — 폼이 비워진 뒤 합계·강조 상태를 다시 맞춤 */
+    function resetForm() {
+      recalc();
+      document.getElementById("addr").classList.remove("is-error");
+    }
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>
