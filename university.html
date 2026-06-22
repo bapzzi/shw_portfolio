@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<!--
+  =============================================================
+  신해원 포트폴리오 — 대학 학업 관리·자동화 시스템 (university.html)
+  광운대학교 학업 운영 / 2026
+  -------------------------------------------------------------
+  이 페이지의 시맨틱 구조
+    <header> 사이트 공통
+    <main>
+      <section.page-header>     프로젝트 타이틀
+      <section.section>         1. 프로젝트 개요
+      <section.section--alt>    2. 다룬 내용 (파이프라인 Step 1~5)
+      <section.section>         3. 어떻게 만들었나 (자동화·스킬·스키마)
+      <section.section--alt>    4. 이어진 결과물 (CTA)
+    <footer> 사이트 공통
+  =============================================================
+-->
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>대학 학업 관리·자동화 시스템 · 신해원 포트폴리오</title>
+  <meta name="description" content="Claude Code 로 한 학기 6과목의 강의자료·필기·시험대비를 데이터베이스화하고, 강의 PDF 처리 파이프라인을 자동화한 학업 관리 시스템 소개." />
+
+  <link rel="stylesheet" as="style" crossorigin
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand" aria-label="홈으로">
+        <span class="brand-mark">SHW</span>
+        <span class="brand-suffix">/portfolio</span>
+      </a>
+      <nav class="primary-nav" aria-label="주 메뉴">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ====================================================
+         페이지 헤더
+         ==================================================== -->
+    <section class="page-header">
+      <div class="container">
+        <span class="section-eyebrow">// Project</span>
+        <h1 class="section-title">대학 학업 관리·자동화 시스템</h1>
+        <p class="section-desc">
+          한 학기 6과목의 강의자료·필기·시험대비를 흩어진 PDF 더미가 아니라
+          하나의 데이터베이스로 관리했습니다. Claude Code 로 강의 PDF 처리
+          파이프라인을 자동화하고, 과목별 스키마와 스킬로 정리 방식을 표준화한
+          개인 학업 운영 프로젝트입니다.
+        </p>
+      </div>
+    </section>
+
+
+    <!-- ====================================================
+         1. 프로젝트 개요
+         ==================================================== -->
+    <section class="section">
+      <div class="container">
+        <div class="about-profile-grid">
+
+          <article class="about-story-card fade-in">
+            <span class="section-eyebrow">// Overview</span>
+            <h2>"공부를 데이터로 다룬다" — 학업을 운영 가능한 시스템으로</h2>
+            <p>
+              매 학기 강의 PDF, 필기, 발표자료, 시험 자료가 폴더마다 흩어지는 문제를
+              풀고 싶었습니다. 그래서 학업 자체를 하나의 프로젝트로 보고, 입력(강의자료)
+              부터 가공(정리본)·산출(시험 대비)까지 흐르는 파이프라인으로 설계했습니다.
+            </p>
+            <p>
+              핵심은 두 가지입니다. 첫째, 반복 작업(PDF 를 이미지로 바꾸고 노트 틀을 만드는 일)은
+              Python 스크립트로 자동화했습니다. 둘째, 과목마다 다른 시험 형태에 맞춰
+              정리 방식을 과목별 스키마와 스킬로 표준화해, 같은 명령으로 과목마다 다른
+              결과가 나오도록 했습니다.
+            </p>
+            <p>
+              학기가 끝난 뒤에는 원본 강의자료를 정리하고, "무엇을 배웠나"가 아니라
+              "어떻게 관리했나"라는 운영 방식 자체를 아카이브로 남겼습니다. 다음 학기에도
+              같은 구조를 그대로 재사용할 수 있는 자산이 되었습니다.
+            </p>
+          </article>
+
+          <aside class="about-highlight-card fade-in" aria-label="프로젝트 메타">
+            <p class="hero-card-label">// Meta</p>
+            <div class="about-keyword-list">
+              <span>Claude Code</span>
+              <span>Lecture Pipeline</span>
+              <span>Skill System</span>
+              <span>Subject Schema</span>
+              <span>Python Automation</span>
+              <span>Obsidian</span>
+            </div>
+            <div class="about-mini-metrics">
+              <div>
+                <strong>6</strong>
+                <span>과목 동시 운영</span>
+              </div>
+              <div>
+                <strong>48</strong>
+                <span>PDF · 1,607 슬라이드 자동 처리</span>
+              </div>
+              <div>
+                <strong>4</strong>
+                <span>작업 스킬</span>
+              </div>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ====================================================
+         2. 다룬 내용 (파이프라인 Step 1~5)
+         ==================================================== -->
+    <section class="section section--alt" aria-labelledby="contents-title">
+      <div class="container">
+        <header class="section-heading fade-in">
+          <span class="section-eyebrow">// Contents</span>
+          <h2 class="section-title" id="contents-title">학업 처리 파이프라인</h2>
+          <p class="section-desc">
+            강의자료 한 개가 들어오면, 아래 다섯 단계를 거쳐 시험 대비 자료까지
+            이어집니다. 뒤로 갈수록 정보가 압축되고 시험 형태에 맞게 재구성됩니다.
+          </p>
+        </header>
+
+        <div class="about-value-grid">
+
+          <article class="value-card fade-in">
+            <span class="value-number">01</span>
+            <h3>Step 1 · 수집</h3>
+            <p>바탕화면에 쌓인 강의 PDF 를 과목별 입력 폴더로 모읍니다.</p>
+          </article>
+
+          <article class="value-card fade-in">
+            <span class="value-number">02</span>
+            <h3>Step 2 · 변환 (자동화)</h3>
+            <p>Python 스크립트가 PDF 를 슬라이드 이미지와 필기용 노트 틀로 자동 변환합니다. 이미 처리한 파일은 건너뜁니다.</p>
+          </article>
+
+          <article class="value-card fade-in">
+            <span class="value-number">03</span>
+            <h3>Step 3 · 정리</h3>
+            <p>정리 스킬이 과목 서식에 맞춰 강의 내용을 구조화된 정리본으로 만듭니다.</p>
+          </article>
+
+          <article class="value-card fade-in">
+            <span class="value-number">04</span>
+            <h3>Step 4 · 시험 대비</h3>
+            <p>시험 스킬이 내 필기를 기준으로 과목별 시험 형태에 맞춘 최종 정리본을 생성합니다.</p>
+          </article>
+
+          <article class="value-card fade-in">
+            <span class="value-number">05</span>
+            <h3>Step 5 · 운영</h3>
+            <p>과목별 메타 스키마와 시행착오 로그로 전체 과정을 일관되게 표준화·개선합니다.</p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ====================================================
+         3. 어떻게 만들었나
+         ==================================================== -->
+    <section class="section" aria-labelledby="approach-title">
+      <div class="container">
+        <header class="section-heading fade-in">
+          <span class="section-eyebrow">// Approach</span>
+          <h2 class="section-title" id="approach-title">어떻게 만들었나</h2>
+          <p class="section-desc">
+            반복은 코드로, 판단은 스키마로 나눴습니다. 자동화가 분량을 감당하고,
+            과목별 규칙이 품질을 책임지는 구조입니다.
+          </p>
+        </header>
+
+        <div class="about-value-grid">
+
+          <article class="value-card fade-in">
+            <span class="value-number">01</span>
+            <h3>변환 자동화 스크립트</h3>
+            <p>
+              설정 파일과 처리 로그를 기반으로, 같은 PDF 를 두 번 변환하지 않는
+              멱등(idempotent) 파이프라인을 만들었습니다. 미리보기(dry-run)로
+              결과를 먼저 확인한 뒤 실행합니다.
+            </p>
+          </article>
+
+          <article class="value-card fade-in">
+            <span class="value-number">02</span>
+            <h3>스킬 시스템</h3>
+            <p>
+              "과목 생성 → 업로드 → 정리 → 시험 정리" 4단계를 각각 스킬로 만들어,
+              자연어 명령 한 줄로 정해진 작업이 일관되게 실행되도록 했습니다.
+            </p>
+          </article>
+
+          <article class="value-card fade-in">
+            <span class="value-number">03</span>
+            <h3>과목별 데이터 스키마</h3>
+            <p>
+              과목마다 기본 정보·시험 유형·전략·문제 예시를 담은 메타 레코드를 두고,
+              이 레코드가 정리·시험 스킬의 출력을 과목마다 다르게 이끌도록 설계했습니다.
+            </p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ====================================================
+         4. 이어진 결과물 (CTA)
+         ==================================================== -->
+    <section class="section section--alt" aria-labelledby="result-title">
+      <div class="container">
+        <header class="section-heading fade-in">
+          <span class="section-eyebrow">// Result</span>
+          <h2 class="section-title" id="result-title">이 시스템에서 이어진 결과물</h2>
+          <p class="section-desc">
+            학업 관리는 그 자체로 끝나지 않고, 실제 산출물로 이어졌습니다.
+            이 포트폴리오에서 직접 확인할 수 있습니다.
+          </p>
+        </header>
+
+        <aside class="about-highlight-card fade-in" aria-label="이어진 결과물 링크">
+          <p class="hero-card-label">// Links</p>
+          <p>
+            <strong>인터넷활용 웹 과제 → 이 포트폴리오</strong><br />
+            수업의 HTML·CSS·JavaScript 과제 결과물을 다듬어 지금 보고 계신
+            포트폴리오 사이트와 실습 프로젝트들로 발전시켰습니다.
+          </p>
+          <p>
+            <a href="portfolio.html" class="project-link">
+              프로젝트 모아보기 <span aria-hidden="true">→</span>
+            </a>
+          </p>
+          <p style="margin-top: 24px;">
+            <strong>ERP개론 팀프로젝트 → 발표 자료</strong><br />
+            같은 학기의 ERP개론 과제는 별도 발표 자료 프로젝트로 정리했습니다.
+          </p>
+          <p>
+            <a href="lotte-erp.html" class="project-link">
+              롯데케미칼 SAP 발표자료 보기 <span aria-hidden="true">→</span>
+            </a>
+          </p>
+        </aside>
+      </div>
+    </section>
+
+  </main>
+
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <p class="footer-brand-name">신해원 · Shin Haewon</p>
+        <p class="footer-brand-desc">
+          광운대학교 경영학부 / 예비 ERP 개발자.
+          비즈니스의 흐름을 코드로 옮기는 일에 관심이 있습니다.
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>Pages</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="mailto:win737449@gmail.com">win737449@gmail.com</a></li>
+          <li><a href="https://github.com/bapzzi" target="_blank" rel="noopener">github.com/bapzzi</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <small>© <span id="year"></span> Shin Haewon. All rights reserved.</small>
+      <small>Built with HTML · CSS · JavaScript</small>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
