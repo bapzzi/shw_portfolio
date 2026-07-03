@@ -1,161 +1,33 @@
 # 신해원 포트폴리오 (Shin Haewon Portfolio)
 
-광운대학교 인터넷활용 수업 과제로 제작한 개인 포트폴리오 사이트입니다.
-실제로 GitHub Pages 등에 배포해 사용할 수 있는 수준으로 만들었습니다.
+## 목적
 
-🔗 **Live**: https://bapzzi.github.io _(배포 후 활성화)_
-🐙 **Repo**: https://github.com/bapzzi
+개인 포트폴리오 사이트. 광운대학교 인터넷활용 수업 과제로 처음 만들었고,
+지금은 그 위에서 **단일 소스 빌드 구조**로 다시 만들고 있다.
+내용을 한 곳(`content/portfolio.md`)에서만 관리하고, 거기서 웹용·PDF용을 자동으로 뽑아
+GitHub Pages에 배포하는 것이 목표다.
 
----
+## 현재상태
 
-## 📂 파일 구조
+**아직 배포 전이다.** 라이브 URL(`bapzzi.github.io`)은 아직 게시하지 않았다.
 
-```
-shw_portfolio/
-├── index.html         # 홈 (히어로 + 핵심 스킬 미리보기)
-├── about.html         # 소개 (자기소개 + 학력 타임라인 + 관심분야)
-├── portfolio.html     # 프로젝트 카드 그리드 + JavaScript 실습 연결
-├── dday.html          # Date 객체 기반 D-Day 계산기
-├── random.html        # String/Array/Math 기반 저녁 메뉴 랜덤 뽑기
-├── contact.html       # 연락처 카드 + 메시지 폼
-├── style.css          # 모든 페이지가 공유하는 스타일시트
-├── script.js          # 모든 페이지가 공유하는 자바스크립트
-└── README.md          # 이 문서
-```
+- **단일 소스 빌드 파이프라인 도입**: `content/portfolio.md`(원본 하나) →
+  `scripts/build.sh`(pandoc) → `build/web.html`(웹용)·`build/pdf.html`(PDF용) 생성.
+  서식(`styles/web.css`·`styles/pdf.css`)만 매체별로 다르게 입힌다.
+  - 단, `content/portfolio.md`는 아직 **골격만** 잡힌 상태다(About/역량/프로젝트/Contact 제목만 있고 내용은 빈칸).
+  - `build/`는 `.gitignore`로 커밋 제외(빌드 산출물이라 소스만 추적).
+- **프로젝트 페이지 추가**: `lotte-erp.html`(롯데 ERP 발표), `university.html`(대학 과제 관리) 두 개를 추가.
+- **옛 수업 실습은 박제**: D-Day 계산기·저녁 메뉴 랜덤 등 인터넷활용 실습 페이지는
+  `v1-internet-course` 태그로 남기고 루트에서는 제거했다.
+- **남아 있는 옛 구조**: 루트에는 초기 수업 과제 시절의 정적 페이지
+  (`index.html`·`about.html`·`portfolio.html`·`contact.html`)와 공용 `style.css`·`script.js`가 아직 그대로 있다.
+  단일 소스 빌드(`content` → `build`)와 이 옛 페이지들이 **아직 병존**한다.
+- **태그 2개**: `v0.1.0`(단일 소스 baseline), `v1-internet-course`(수업 실습 버전 박제).
 
-총 4개의 HTML 페이지가 단일 `style.css` 와 `script.js` 를 공유하는 구조이며,
-이는 인터넷활용 수업의 **HTML / CSS / JavaScript 분리 원칙**을 따릅니다.
+## 다음 할 일
 
----
-
-## 🧪 11주차 JavaScript 코어 객체 실습 반영
-
-인터넷활용 11주차 실습 요구사항을 포트폴리오 내부 기능으로 확장했습니다.
-
-### D-Day 계산기
-
-`dday.html`은 `Date` 객체를 활용해 목표 날짜와 기준 날짜의 차이를 계산합니다.  
-사용자는 과제, 시험, 발표일 같은 목표 이름과 날짜를 입력할 수 있으며, 결과는 `D-`, `D-Day`, `D+` 형식으로 표시됩니다.
-
-사용한 핵심 개념은 다음과 같습니다.
-
-- `new Date()`로 날짜 객체 생성
-- `Date.getTime()`으로 날짜를 밀리초 단위 숫자로 변환
-- `Math.ceil()`로 남은 일수 올림 처리
-- `Math.abs()`로 지난 날짜의 절댓값 처리
-
-### 저녁 메뉴 랜덤 뽑기
-
-`random.html`은 콤마로 입력한 저녁 메뉴 후보를 배열로 변환한 뒤, 무작위로 하나를 추천합니다.  
-한식, 간단식, 랜덤 믹스 프리셋과 최근 뽑기 기록 기능을 추가해 단순 실습 예제보다 실제 웹 기능처럼 보이도록 구성했습니다.
-
-사용한 핵심 개념은 다음과 같습니다.
-
-- `String.split(',')`으로 문자열을 배열로 변환
-- `String.trim()`으로 공백 제거
-- `Array.length`로 후보 개수 확인
-- `Math.random()`과 `Math.floor()`로 랜덤 인덱스 생성
-
----
-
-## 🎨 사용한 기술 정리
-
-### HTML
-
-- **시맨틱 태그** 적극 활용: `<header>`, `<nav>`, `<main>`, `<section>`, `<article>`,
-  `<aside>`, `<footer>`, `<ol>`, `<ul>`
-- **접근성 속성**: `aria-label`, `aria-labelledby`, `aria-current`, `aria-live`,
-  `alt`, `role`
-- **메타 태그**: `description`, `Open Graph` (카카오톡/페북 공유 시 미리보기)
-- **시맨틱 폼**: `<label>` + `for`, `required`, `type="email"` 등
-
-### CSS
-
-- **CSS 변수(`--`)**: 색상·폰트·라운드·그림자·트랜지션을 한곳에서 관리
-- **Flexbox + Grid 혼용**: 헤더는 Flex, 카드 레이아웃은 Grid
-- **`grid-template-columns: repeat(auto-fill, minmax(...))`** 로 반응형 자동 그리드
-- **`clamp()`** 로 화면 크기에 따라 부드럽게 변하는 폰트 사이즈
-- **`::before` / `::after`** 가상 요소로 장식 추가
-- **`@keyframes`** 애니메이션 (히어로 진입, 타이핑 커서, 펄스)
-- **`backdrop-filter`** 로 헤더 글래스모피즘
-- **`@media`** 미디어 쿼리로 모바일 대응
-- **`@media (prefers-reduced-motion: reduce)`** 접근성 — 모션을 줄이고 싶은 사용자 배려
-- **`:focus-visible`** 키보드 포커스 스타일 (마우스 클릭엔 안 보임)
-
-### JavaScript
-
-- **`DOMContentLoaded`** 로 안전한 시점에 스크립트 실행
-- **`document.getElementById` / `querySelectorAll` / `forEach`** 로 DOM 조작
-- **타이핑 애니메이션**: `setTimeout` 재귀 호출로 단어 단위 타이핑/지우기
-- **`location.pathname`** 으로 현재 페이지 감지 → 네비 active 표시
-- **`IntersectionObserver`** 로 스크롤 페이드인 (구형 브라우저 폴백 포함)
-- **폼 검증**: 정규식, `closest()`, `classList.add/remove`
-- **`mailto:` 링크 + `encodeURIComponent`** 로 한글 깨짐 없이 메일 클라이언트 실행
-- **`window.matchMedia('(prefers-reduced-motion)')`** 로 사용자 환경 존중
-
----
-
-## ✨ 주요 인터랙션
-
-1. **히어로 타이핑 효과** — `ERP 개발자` → `SAP 컨설턴트` → `Business Developer` →
-   `경영학도` 가 반복 타이핑됩니다.
-2. **현재 페이지 강조** — 페이지를 이동할 때마다 네비의 해당 메뉴가 인디고 색으로 강조됩니다.
-3. **스크롤 페이드인** — 스크롤하면서 카드들이 부드럽게 나타납니다.
-4. **헤더 블러** — 스크롤할 때 헤더가 살짝 투명해지며 배경에 블러가 적용됩니다.
-5. **컨택트 폼** — 검증을 통과하면 사용자의 메일 앱이 자동으로 열려 실제로 메일을 보낼 수 있습니다.
-
----
-
-## 🎯 디자인 시스템
-
-| 항목 | 값 |
-|---|---|
-| 메인 폰트 (한글) | **Pretendard** (모던한 한글 산세리프) |
-| 모노 폰트 | **JetBrains Mono** (메타 텍스트 / 라벨용) |
-| 액센트 컬러 | `#4f46e5` (Indigo 600) |
-| 텍스트 컬러 | `#18181b` (거의 검정) |
-| 배경 | `#fafaf9` (살짝 따뜻한 흰색) |
-| 컨테이너 너비 | `1080px` |
-
----
-
-## 📝 라이선스
-
-개인 포트폴리오. 학습 목적의 코드 참고는 자유롭게 가능합니다.
-
-© 2026 Shin Haewon
-
-
----
-
-## 🧪 13주차 DOM 객체 제어 및 동적 문서 구성 실습 반영
-
-인터넷활용 13주차 실습 요구사항을 기존 포트폴리오의 디자인 톤에 맞춰 확장했습니다.
-
-### DOM Style Lab
-
-`dom_style.html`은 DOM 객체의 `style` 프로퍼티를 직접 제어하는 실습 페이지입니다.  
-버튼 클릭에 따라 타겟 문장의 글자색, 글자 크기, 배경색, 표시 여부가 즉시 변경됩니다.
-
-사용한 핵심 개념은 다음과 같습니다.
-
-- `document.getElementById()`로 변경 대상 요소 선택
-- `style.color`로 글자색 변경
-- `style.fontSize`로 글자 크기 변경
-- `style.backgroundColor`로 배경색 변경
-- `style.display`로 숨기기/보이기 토글
-
-### Contact Guestbook Comments
-
-`contact.html#guestbook`은 Contact 페이지 하단에 통합한 댓글 추가/삭제 실습입니다.  
-사용자가 이름과 댓글을 입력하면 JavaScript가 새로운 댓글 카드를 생성해 목록에 추가하고,
-삭제 버튼을 누르면 해당 댓글 요소를 DOM에서 제거합니다.
-
-사용한 핵심 개념은 다음과 같습니다.
-
-- `createElement()`로 댓글 카드 요소 생성
-- `appendChild()`와 `insertBefore()`로 댓글 목록에 추가
-- `removeChild()`로 댓글 삭제
-- `localStorage`로 새로고침 이후에도 댓글 유지
-
-두 실습은 `portfolio.html`의 프로젝트 카드에 연결되어 있으며, 기존 D-Day 계산기와 저녁 메뉴 랜덤 뽑기처럼 포트폴리오 내부 JavaScript 실습 프로젝트로 구성했습니다.
+1. `content/portfolio.md`의 빈 골격을 실제 내용으로 채운다(About·핵심 역량·프로젝트 STAR·Contact).
+2. `bash scripts/build.sh`로 웹·PDF를 뽑아 결과를 확인한다.
+3. **GitHub Pages에 실제 배포**하고 라이브 링크를 활성화한다.
+4. 옛 루트 페이지(`index`·`about`·`portfolio`·`contact`)와 단일 소스 빌드의 관계를 정리한다
+   (통합할지, 옛 페이지를 태그로 박제하고 걷어낼지 결정).
