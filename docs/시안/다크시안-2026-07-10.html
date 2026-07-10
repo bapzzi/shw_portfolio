@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>다크 시안 — 블랙+옐로 · 시각 우선</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fonts-archive/Paperlogy/Paperlogy.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/joungkyun/font-d2coding/d2coding.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0D0D0B;
+    --surface: #171612;
+    --line: rgba(242,240,234,.09);
+    --yellow: #FFD02E;
+    --white: #F2F0EA;
+    --dim: rgba(242,240,234,.55);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--white); font-family: "Pretendard Variable", Pretendard, sans-serif; overflow-x: hidden; }
+  .disp { font-family: "Paperlogy", sans-serif; }
+
+  /* ── 히어로: 텍스트 3줄 + 큰 시각물 ── */
+  .hero { max-width: 1080px; margin: 0 auto; padding: 96px 32px 72px; position: relative; }
+  .hero .ghost { position: absolute; top: 24px; left: 24px; font-family: "Paperlogy", sans-serif; font-weight: 900; font-size: 150px; color: transparent; -webkit-text-stroke: 1px rgba(242,240,234,.06); letter-spacing: -.02em; pointer-events: none; user-select: none; }
+  .chip { display: inline-block; border: 1px solid var(--yellow); color: var(--yellow); font-size: 12px; font-weight: 700; padding: 6px 14px; border-radius: 999px; letter-spacing: .08em; margin-bottom: 28px; }
+  h1 { font-family: "Paperlogy", sans-serif; font-weight: 900; font-size: 72px; line-height: 1.12; letter-spacing: -0.02em; position: relative; z-index: 1; }
+  h1 .y { color: var(--yellow); }
+  .sub { margin-top: 20px; font-size: 17px; color: var(--dim); }
+  .cta { margin-top: 36px; display: flex; gap: 12px; }
+  .btn { font-weight: 700; font-size: 15px; padding: 14px 26px; border-radius: 10px; text-decoration: none; }
+  .btn-y { background: var(--yellow); color: #111; }
+  .btn-o { border: 1px solid var(--line); color: var(--white); }
+
+  /* 히어로 시각물: 겹친 앱 목업 2장 + 옐로 도형 */
+  .hero-visual { margin-top: 64px; position: relative; height: 380px; }
+  .blob { position: absolute; right: -60px; top: -30px; width: 420px; height: 420px; background: radial-gradient(circle at 30% 30%, rgba(255,208,46,.22), transparent 65%); border-radius: 50%; }
+  .mock { background: #1C1B16; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; box-shadow: 0 24px 60px rgba(0,0,0,.5); }
+  .mock .bar { display: flex; gap: 6px; padding: 12px 14px; border-bottom: 1px solid var(--line); }
+  .mock .dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(242,240,234,.15); }
+  .mock .dot:first-child { background: var(--yellow); }
+  .m1 { position: absolute; left: 0; top: 0; width: 62%; height: 360px; }
+  .m2 { position: absolute; right: 0; top: 60px; width: 44%; height: 300px; z-index: 2; }
+  .m-body { padding: 18px; display: grid; gap: 12px; }
+  .row { display: flex; gap: 12px; }
+  .cell { border-radius: 8px; background: rgba(242,240,234,.06); }
+  .cell.y { background: rgba(255,208,46,.85); }
+  .h20 { height: 20px; } .h48 { height: 48px; } .h90 { height: 90px; } .h120 { height: 120px; }
+  .w30 { width: 30%; } .w45 { width: 45%; } .w70 { flex: 1; }
+  .bars { display: flex; align-items: flex-end; gap: 10px; height: 120px; padding: 0 6px; }
+  .b { flex: 1; border-radius: 6px 6px 0 0; background: rgba(242,240,234,.14); }
+  .b.y { background: var(--yellow); }
+
+  /* ── 수치: 숫자만 ── */
+  .nums { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .nums-in { max-width: 1080px; margin: 0 auto; padding: 40px 32px; display: flex; }
+  .n { flex: 1; }
+  .n .v { font-family: "Paperlogy", sans-serif; font-weight: 900; font-size: 56px; color: var(--yellow); line-height: 1; }
+  .n .k { margin-top: 8px; font-size: 13px; color: var(--dim); letter-spacing: .04em; }
+
+  /* ── 프로젝트: 카드=거의 이미지 ── */
+  .sec { max-width: 1080px; margin: 0 auto; padding: 88px 32px; position: relative; }
+  .sec .ghost { position: absolute; top: 30px; left: 24px; font-family: "Paperlogy", sans-serif; font-weight: 900; font-size: 120px; color: transparent; -webkit-text-stroke: 1px rgba(242,240,234,.06); pointer-events: none; user-select: none; }
+  h2 { font-family: "Paperlogy", sans-serif; font-weight: 800; font-size: 34px; position: relative; z-index: 1; }
+  h2 .y { color: var(--yellow); }
+  .grid { margin-top: 40px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; transition: transform .2s; }
+  .card:hover { transform: translateY(-4px); border-color: rgba(255,208,46,.4); }
+  .thumb { height: 190px; padding: 16px 16px 0; background: linear-gradient(180deg, rgba(255,208,46,.06), transparent); }
+  .thumb .mock { height: 100%; border-radius: 10px 10px 0 0; box-shadow: none; }
+  .meta { padding: 18px 20px 20px; display: flex; justify-content: space-between; align-items: center; }
+  .meta .t { font-weight: 800; font-size: 17px; }
+  .meta .tag2 { font-size: 12px; color: var(--yellow); font-weight: 700; }
+  .m-body.tight { padding: 12px; gap: 8px; }
+
+  /* ── 시그니처: 터미널 창 하나 ── */
+  .term { margin-top: 40px; background: #131310; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; max-width: 720px; }
+  .term .bar { display: flex; gap: 6px; padding: 12px 14px; border-bottom: 1px solid var(--line); align-items: center; }
+  .term .dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(242,240,234,.15); }
+  .term .dot:nth-child(1) { background: #E0604C; }
+  .term .dot:nth-child(2) { background: var(--yellow); }
+  .term .dot:nth-child(3) { background: #59B26A; }
+  .term .name { margin-left: 8px; font-size: 12px; color: var(--dim); font-family: "JetBrains Mono", "D2Coding", monospace; }
+  .term .body { padding: 20px 22px; font-family: "JetBrains Mono", "D2Coding", monospace; font-size: 13.5px; line-height: 1.9; }
+  .term .k { color: var(--yellow); }
+  .rejected { display: flex; align-items: center; gap: 10px; margin-top: 14px; font-size: 13px; color: var(--dim); }
+  .rejected s { opacity: .7; }
+  .stamp { border: 1.5px solid #E0604C; color: #E0604C; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 4px; letter-spacing: .1em; }
+
+  footer { border-top: 1px solid var(--line); padding: 28px 32px; text-align: center; font-size: 13px; color: var(--dim); }
+
+  @media (max-width: 760px) {
+    h1 { font-size: 40px; }
+    .hero .ghost { font-size: 80px; }
+    .hero-visual { height: auto; }
+    .m1 { position: static; width: 100%; height: 260px; }
+    .m2 { display: none; }
+    .blob { display: none; }
+    .nums-in { flex-wrap: wrap; gap: 24px; }
+    .n { flex-basis: 45%; }
+    .n .v { font-size: 40px; }
+    .grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 히어로: 문장 2개가 전부 -->
+<section class="hero">
+  <span class="chip">DX · AI-DRIVEN</span>
+  <h1>판단은 사람이,<br>구현은 <span class="y">AI</span>가.</h1>
+  <p class="sub">경영학부생이 AI를 통제해 배포한 라이브 서비스 3개.</p>
+  <div class="cta">
+    <a class="btn btn-y" href="#">실물 보기</a>
+    <a class="btn btn-o" href="#">과정 보기</a>
+  </div>
+  <div class="hero-visual">
+    <div class="mock m1">
+      <div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+      <div class="m-body">
+        <div class="row"><div class="cell y h20 w30"></div><div class="cell h20 w70"></div></div>
+        <div class="bars"><div class="b" style="height:35%"></div><div class="b" style="height:60%"></div><div class="b y" style="height:95%"></div><div class="b" style="height:50%"></div><div class="b" style="height:75%"></div><div class="b y" style="height:85%"></div><div class="b" style="height:40%"></div></div>
+        <div class="row"><div class="cell h48 w45"></div><div class="cell h48 w70"></div></div>
+      </div>
+    </div>
+    <div class="mock m2">
+      <div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+      <div class="m-body">
+        <div class="cell h20" style="width:55%"></div>
+        <div class="row"><div class="cell y h90 w45"></div><div class="cell h90 w70"></div></div>
+        <div class="cell h48"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 수치: 숫자 4개, 문장 0개 -->
+<section class="nums">
+  <div class="nums-in">
+    <div class="n"><div class="v">3</div><div class="k">라이브 서비스</div></div>
+    <div class="n"><div class="v">47</div><div class="k">기록된 결정</div></div>
+    <div class="n"><div class="v">21</div><div class="k">기각한 대안</div></div>
+    <div class="n"><div class="v">312</div><div class="k">커밋</div></div>
+  </div>
+</section>
+
+<!-- 프로젝트: 카드 = 스크린샷 자리 + 제목 한 줄 -->
+<section class="sec">
+  <h2>실물이 <span class="y">증거</span></h2>
+  <div class="grid">
+    <div class="card">
+      <div class="thumb"><div class="mock"><div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        <div class="m-body tight"><div class="row"><div class="cell y h20 w30"></div><div class="cell h20 w70"></div></div><div class="bars" style="height:70px"><div class="b" style="height:40%"></div><div class="b y" style="height:90%"></div><div class="b" style="height:65%"></div><div class="b" style="height:80%"></div></div></div>
+      </div></div>
+      <div class="meta"><span class="t">ADsP 스터디 보드</span><span class="tag2">LIVE ↗</span></div>
+    </div>
+    <div class="card">
+      <div class="thumb"><div class="mock"><div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        <div class="m-body tight"><div class="cell h20" style="width:50%"></div><div class="row"><div class="cell y h48 w45"></div><div class="cell h48 w70"></div></div><div class="cell h20"></div></div>
+      </div></div>
+      <div class="meta"><span class="t">AI 릴레이</span><span class="tag2">LIVE ↗</span></div>
+    </div>
+    <div class="card">
+      <div class="thumb"><div class="mock"><div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        <div class="m-body tight"><div class="row"><div class="cell h90 w45"></div><div class="cell y h90 w70"></div></div><div class="cell h20" style="width:70%"></div></div>
+      </div></div>
+      <div class="meta"><span class="t">이 포트폴리오</span><span class="tag2">PROCESS ↗</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 시그니처: 터미널 창 = 시각 오브젝트 -->
+<section class="sec" style="padding-top:0">
+  <h2>프롬프트까지 <span class="y">공개</span></h2>
+  <div class="term">
+    <div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="name">decision-log — adsp-board</span></div>
+    <div class="body">
+      <span class="k">프롬프트 &gt;</span> 진도 판정은 절 학습만 자동, 점검·복습은 수동 체크로 분리. 통제감이 자동화보다 우선.
+      <div class="rejected"><s>전 항목 자동 판정</s> <span class="stamp">기각</span> 통제감 상실</div>
+    </div>
+  </div>
+</section>
+
+<footer>※ 문안·수치·앱 화면은 더미 목업 — 실제로는 라이브 스크린샷이 들어갑니다</footer>
+
+</body>
+</html>
