@@ -18,7 +18,5 @@
 
 ## 다음 할 일
 
-1. 카드 썸네일을 CSS 목업 → 라이브 실스크린샷으로 교체 (1순위)
-2. favicon 추가(스캐폴드 기본값 삭제 후 미부착 상태)
-3. ai-relay 첫 노드 ⊘기각 인라인을 곁가지 불릿으로 분리할지 — 원고 형식, owner 결정 대기
-4. kwu-erpclub.github.io 링크를 사이트에 추가할지 — owner 결정 대기
+1. ai-relay 첫 노드 ⊘기각 인라인을 곁가지 불릿으로 분리할지 — 원고 형식, owner 결정 대기
+2. kwu-erpclub.github.io 링크를 사이트에 추가할지 — owner 결정 대기
