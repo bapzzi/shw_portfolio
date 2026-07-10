@@ -20,3 +20,4 @@
 
 1. ai-relay 첫 노드 ⊘기각 인라인을 곁가지 불릿으로 분리할지 — 원고 형식, owner 결정 대기
 2. kwu-erpclub.github.io 링크를 사이트에 추가할지 — owner 결정 대기
+3. adsp-board 카드 썸네일을 로그인 게이트 화면 → 내부 대시보드 화면으로 교체할지 — PIN 인증 필요라 owner 협조·결정 대기
