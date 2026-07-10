@@ -35,7 +35,7 @@
 - 원천: ai-harness-mastery, vibe-coding-automation
 
 ### ◆ 지금 — 실물로 증명 (2026.06 ~)
-- 라이브 서비스 3개 배포(케이스 스터디로 연결) · LG CNS AM Inspire Camp 6기 **선발** · ERP연구회 산하 스터디 설계 중
+- 라이브 서비스 3개 배포(케이스 스터디로 연결) · LG CNS AM Inspire Camp 6기 **선발** · [ERP연구회 산하 스터디](https://kwu-erpclub.github.io) 설계 중
 - 칩: `라이브 3` `캠프 선발` `학점 3.94`
 
 ## 표기 규칙 — 자소서/포폴 경계 (2026-07-10 owner 확정)
