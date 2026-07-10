@@ -7,7 +7,7 @@
 
 ## 현재상태
 
-**앱 구현 완료, Vercel 연결 대기.** (2026-07-10)
+**라이브 — https://shw-portfolio.vercel.app** (2026-07-10, 통제 세션 검증 완료·실측 기입)
 
 - 구조: 그릇형 — 앱 알맹이 `app/`(Vite+React+TS), 문안 원천 `content/*.md`(코드에 하드코딩 금지),
   디자인 단일원천 = erp-club 디자인규칙(다크+옐로, 토큰 `app/src/styles/global.css`)
@@ -18,7 +18,7 @@
 
 ## 다음 할 일
 
-1. 사용자가 Vercel 프로젝트 생성·repo 연결(루트 디렉토리=`app`) → 라이브 URL 확보
-2. 통제 세션 session-review 검증(브리프 `docs/브리프-2026-07-10-앱구현.md` §6) → 원고 v2 반영
-3. `content/case-portfolio.md` 실측 수치 기입(라이브 URL·커밋 수) — 검토 후
-4. 카드 썸네일을 CSS 목업 → 라이브 스크린샷으로 교체(백로그)
+1. 카드 썸네일을 CSS 목업 → 라이브 실스크린샷으로 교체 (1순위)
+2. favicon 추가(스캐폴드 기본값 삭제 후 미부착 상태)
+3. ai-relay 첫 노드 ⊘기각 인라인을 곁가지 불릿으로 분리할지 — 원고 형식, owner 결정 대기
+4. kwu-erpclub.github.io 링크를 사이트에 추가할지 — owner 결정 대기
