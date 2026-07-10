@@ -2,6 +2,10 @@ import { Link } from 'react-router-dom'
 import { cases, journey, stats } from '../lib/content'
 import { Timeline } from '../components/Timeline'
 import { MockDashboard, MockPanel } from '../components/Mock'
+import { Shot } from '../components/Shot'
+import shotAdsp from '../assets/shot-adsp-board.webp'
+import shotRelay from '../assets/shot-ai-relay.webp'
+import shotPf from '../assets/shot-portfolio.webp'
 
 // 히어로·섹션 헤드라인 문안 원천 = 승인 시안(docs/시안/다크시안-2026-07-10.html).
 // About·Contact 데이터 원천 = journey.md 표기 규칙 + cover-letter-db profile(공개 범위만).
@@ -14,9 +18,9 @@ const numItems = [
 ]
 
 const thumbs: Record<string, React.ReactNode> = {
-  'adsp-board': <MockDashboard tight />,
-  'ai-relay': <MockPanel tight />,
-  portfolio: <MockDashboard tight />,
+  'adsp-board': <Shot src={shotAdsp} alt="ADsP 보드 라이브 화면" />,
+  'ai-relay': <Shot src={shotRelay} alt="AI 릴레이 라이브 화면" />,
+  portfolio: <Shot src={shotPf} alt="포트폴리오 라이브 화면" />,
 }
 
 function highlightAI(text: string) {
