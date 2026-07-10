@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- 토큰: 배경 = --bg #0D0D0B, 글자 = --yellow #FFD02E (global.css 단일원천) -->
+  <rect width="64" height="64" rx="14" fill="#0D0D0B"/>
+  <text x="32" y="35" text-anchor="middle" dominant-baseline="central"
+    font-family="Pretendard, 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif"
+    font-size="40" font-weight="800" fill="#FFD02E">신</text>
+</svg>
