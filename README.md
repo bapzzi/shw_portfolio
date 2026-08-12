@@ -26,7 +26,10 @@
 - 핵심 설계 = **축적(원천)과 노출(화면) 분리** — 빼는 행위는 삭제가 아니라 frontmatter `노출: false` 한 줄
 - 적재 목표 = 케이스 8건(신규 6: lesson-replay·aim-hub·adsp-study·harness·lgcns-til + 기존 갱신)
   + 워크 11건(letter-db 파생) + 자산 목록
-- 구현 미착수 — 다음 세션에서 C1~C6(글롭 로딩·frontmatter 파서·프리셋 필터)
+- 구현 미착수 — 다음 세션에서 C0~C6(콘텐츠 이관·글롭 로딩·frontmatter 파서·프리셋 필터)
+- **원고 적재 시작(08-12)**: `content/cases/`에 신형식(frontmatter 포함) 2건 — `adsp-study`(신규)·
+  `adsp-board`(v2 — 1기 종결 반영: 문항표시 개편·시험주간 배지·읽기전용 아카이브 노드 추가, 수치 전부
+  1기-데이터 실측). ⚠구형 `content/case-*.md` 3건은 현 앱이 import 중이라 **C0 전까지 병존**(원천=cases/ 신형)
 
 - 구조: 그릇형 — 앱 알맹이 `app/`(Vite+React+TS), 문안 원천 `content/*.md`(코드에 하드코딩 금지),
   디자인 단일원천 = erp-club 디자인규칙(다크+옐로, 토큰 `app/src/styles/global.css`)
